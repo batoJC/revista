@@ -34,5 +34,33 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "publishing": {
+    "dataSource": "db",
+    "public": true
+  },
+  "article": {
+    "dataSource": "db",
+    "public": true
+  },
+  "comment": {
+    "dataSource": "db",
+    "public": true
+  },
+  "message": {
+    "dataSource": "db",
+    "public": true
+  },
+  "editor": {
+    "dataSource": "db",
+    "public": true
+  },
+  "writer": {
+    "dataSource": "db",
+    "public": true
+  },
+  "assessor": {
+    "dataSource": "db",
+    "public": true
   }
 }

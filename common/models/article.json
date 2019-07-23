@@ -1,0 +1,56 @@
+{
+  "name": "article",
+  "plural": "articles",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "abstract": {
+      "type": "string",
+      "required": true
+    },
+    "key_words": {
+      "type": "string",
+      "required": true
+    },
+    "writers": {
+      "type": [
+        "string"
+      ]
+    },
+    "writer_id": {
+      "type": "string",
+      "required": true
+    },
+    "publishing_id": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "state": {
+      "type": "string"
+    },
+    "file": {
+      "type": "string",
+      "required": true
+    },
+    "assessors": {
+      "type": [
+        "string"
+      ]
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

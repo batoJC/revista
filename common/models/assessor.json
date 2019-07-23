@@ -1,0 +1,53 @@
+{
+  "name": "assessor",
+  "plural": "assessors",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "required": true
+    },
+    "second_name": {
+      "type": "string"
+    },
+    "first_last_name": {
+      "type": "string",
+      "required": true
+    },
+    "second_last_name": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "level_education": {
+      "type": "string",
+      "required": true
+    },
+    "user_id": {
+      "type": "string",
+      "required": true
+    },
+    "specialty": {
+      "type": "string",
+      "required": true
+    },
+    "writer_id": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
