@@ -1,6 +1,7 @@
 Parce aquí esta para que enpecemos con el proyeto :v.
 
+falta enlazar el materialize y hacer lo del datasource pero eso ya en la noche lo dejo
+full
+
 Hoy intento crear el proyecto y los modelos que tenemos en el diagrama
 de clases igual eso se puede modificar en cualquier momento.
-
-Buena
