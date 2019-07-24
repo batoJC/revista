@@ -19,12 +19,12 @@
       "type": "string",
       "required": true
     },
-    "writers": {
+    "authors": {
       "type": [
         "string"
       ]
     },
-    "writer_id": {
+    "author _id": {
       "type": "string",
       "required": true
     },

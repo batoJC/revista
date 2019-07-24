@@ -55,7 +55,7 @@
     "dataSource": "db",
     "public": true
   },
-  "writer": {
+  "author": {
     "dataSource": "db",
     "public": true
   },

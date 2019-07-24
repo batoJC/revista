@@ -1,6 +1,6 @@
 {
-  "name": "writer",
-  "plural": "writers",
+  "name": "author",
+  "plural": "authors",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {

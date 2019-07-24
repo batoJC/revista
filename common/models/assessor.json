@@ -41,7 +41,7 @@
       "type": "string",
       "required": true
     },
-    "writer_id": {
+    "author_id": {
       "type": "string",
       "required": true
     }
