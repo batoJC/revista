@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserauthService } from 'src/app/services/userauth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logout',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: UserauthService,private route: Router) { }
 
   ngOnInit() {
+  }
+
+  logout(){
+    this.authService.logoutUser();
+    this.route.navigateByUrl('/', {skipLocationChange: true}).then(()=> this.route.navigate(["/"]));
   }
 
 }

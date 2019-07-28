@@ -1,15 +1,50 @@
-<nav class="blue">
-    <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Logo</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-            <li><a routerLink="register">Registrase</a></li>
-            <li><a routerLink="login">iniciar Sesión</a></li>
-        </ul>
-    </div>
-</nav>
+<div class="navbar-fixed">
+    <nav class="blue">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Logo</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <!-- Usuario sin loguearse -->
+            <ul *ngIf="rol == 0" class="right hide-on-med-and-down">
+                <li><a routerLink="register">Registrase</a></li>
+                <li><a routerLink="login">iniciar Sesión</a></li>
+            </ul>
+            <!-- Usuario author -->
+            <ul *ngIf="rol == 1" class="right hide-on-med-and-down">
+                <li><a routerLink="#">Registrar Articulo</a></li>
+                <li><a routerLink="logout">Cerrar Sesión</a></li>
+            </ul>
+            <!-- Usuario editor -->
+            <ul *ngIf="rol == 2" class="right hide-on-med-and-down">
+                <li><a routerLink="#">Editor</a></li>
+                <li><a routerLink="logout">Cerrar Sesión</a></li>
+            </ul>
+            <!-- Usuario evaluador -->
+            <ul *ngIf="rol == 3" class="right hide-on-med-and-down">
+                <li><a routerLink="#">Evaluar</a></li>
+                <li><a routerLink="logout">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<ul class="blue sidenav" id="mobile-demo">
-    <li><a class="white-text" routeLink="register">Registrase</a></li>
-    <li><a class="white-text" routeLink="login">iniciar Sesión</a></li>
-</ul>
+
+    <!-- Usuario sin loguearse -->
+    <ul *ngIf="rol == 0" class="blue sidenav" id="mobile-demo">
+        <li><a class="white-text" routerLink="register">Registrase</a></li>
+        <li><a class="white-text" routerLink="login">iniciar Sesión</a></li>
+    </ul>
+    <!-- Usuario author -->
+    <ul *ngIf="rol == 1" class="blue sidenav" id="mobile-demo">
+        <li><a class="white-text" routerLink="#">Registrar Articulo</a></li>
+        <li><a routerLink="logout">Cerrar Sesión</a></li>
+    </ul>
+    <!-- Usuario editor -->
+    <ul *ngIf="rol == 2" class="blue sidenav" id="mobile-demo">
+        <li><a class="white-text" routerLink="#">Editor</a></li>
+        <li><a routerLink="logout">Cerrar Sesión</a></li>
+    </ul>
+    <!-- Usuario evaluador -->
+    <ul *ngIf="rol == 3" class="blue sidenav" id="mobile-demo">
+        <li><a class="white-text" routerLink="#">Evaluar</a></li>
+        <li><a routerLink="logout">Cerrar Sesión</a></li>
+    </ul>
+</div>
