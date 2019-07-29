@@ -5,27 +5,44 @@ import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ResetComponent } from './reset/reset.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { NotLoginGuard } from '../guards/not-login.guard';
+import { LogedGuard } from '../guards/loged.guard';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate :[
+      NotLoginGuard
+    ]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate :[
+      NotLoginGuard
+    ]
   },
   {
     path: 'logout',
-    component: LogoutComponent
+    component: LogoutComponent,
+    canActivate: [
+      LogedGuard
+    ]
   },
   {
     path: 'reset',
-    component: ResetComponent
+    component: ResetComponent,
+    canActivate :[
+      NotLoginGuard
+    ]
   },
   {
     path: 'confirm',
-    component: ConfirmComponent
+    component: ConfirmComponent,
+    canActivate :[
+      NotLoginGuard
+    ]
   }
 ];
 

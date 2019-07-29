@@ -1,70 +1,170 @@
 <div class="row center-align">
     <br>
-    <div class="col borde-blue s12 m12">
-        <h3 class="center">REGISTRARSE</h3>
-        <div class="input-field col s12 m4">
-            <i class="material-icons prefix">info_outline</i>
-            <input [(ngModel)]="dataAuthor.first_name" id="first_name" type="text" class="validate" autocomplete="off">
-            <label for="first_name">Primer Nombre</label>
+    <form [formGroup]='registerData' (ngSubmit)="register()">
+        <div class="col borde-blue s12 m12">
+            <h3 class="center">REGISTRARSE</h3>
+            
+            <div class="input-field col s12 m4">
+                <i class="material-icons prefix">info_outline</i>
+                <input formControlName="first_name" id="first_name" type="text" class="validate" autocomplete="off">
+                <label for="first_name">Primer Nombre</label>
+                <!-- muestra error cuando el valor en el campo es invalido -->
+                <div *ngIf="(first_name.touched || first_name.dirty) && first_name.invalid">
+                    <span *ngIf="first_name.errors.required" class="helper-text error">Debe de ingresar su primer nombre</span>
+                </div>
+                <!-- muestra un mensaje de dato correcto -->
+                <div *ngIf="(first_name.touched || first_name.dirty) && !first_name.invalid">
+                    <span class="helper-text success"></span>
+                </div>
+                <!-- muestra un texto de ayuda para el usuario -->
+                <div *ngIf=" !(first_name.touched || first_name.dirty) && first_name.invalid">
+                    <span class="helper-text"></span>
+                </div>
+            </div>
+            <div class="input-field col s12 m4">
+                <i class="material-icons prefix">info_outline</i>
+                <input formControlName="second_name" id="second_name" type="text" class="validate" autocomplete="off">
+                <label for="second_name">Segundo Nombre</label>
+            </div>
+            <div class="input-field col s12 m4">
+                <i class="material-icons prefix">info_outline</i>
+                <input formControlName="first_last_name" id="first_last_name" type="text" class="validate" autocomplete="off">
+                <label for="first_last_name">Primer Apellido</label>
+                <!-- muestra error cuando el valor en el campo es invalido -->
+                <div *ngIf="(first_last_name.touched || first_last_name.dirty) && first_last_name.invalid">
+                    <span *ngIf="first_last_name.errors.required" class="helper-text error">Ingrese su primer apellido</span>
+                </div>
+                <!-- muestra un mensaje de dato correcto -->
+                <div *ngIf="(first_last_name.touched || first_last_name.dirty) && !first_last_name.invalid">
+                    <span class="helper-text success"></span>
+                </div>
+                <!-- muestra un texto de ayuda para el usuario -->
+                <div *ngIf=" !(first_last_name.touched || first_last_name.dirty) && first_last_name.invalid">
+                    <span class="helper-text"></span>
+                </div>
+            </div>
+            <div class="input-field col s12 m4">
+                <i class="material-icons prefix">info_outline</i>
+                <input formControlName="second_last_name" id="second_last_name" type="text" class="validate" autocomplete="off">
+                <label for="second_last_name">Segundo Apellido</label>
+            </div>
+            <div class="input-field col s12 m4">
+                <i class="material-icons prefix">location_on</i>
+                <input formControlName="country" id="country" type="text" class="validate" autocomplete="off">
+                <label for="country">Pais</label>
+                <!-- muestra error cuando el valor en el campo es invalido -->
+                <div *ngIf="(country.touched || country.dirty) && country.invalid">
+                    <span *ngIf="country.errors.required" class="helper-text error">Debe de ingresar su ciudad</span>
+                </div>
+                <!-- muestra un mensaje de dato correcto -->
+                <div *ngIf="(country.touched || country.dirty) && !country.invalid">
+                    <span class="helper-text success"></span>
+                </div>
+                <!-- muestra un texto de ayuda para el usuario -->
+                <div *ngIf=" !(country.touched || country.dirty) && country.invalid">
+                    <span class="helper-text"></span>
+                </div>
+            </div>
+            <div class="input-field col s12 m4">
+                <i class="material-icons prefix">local_phone</i>
+                <input formControlName="phone" id="phone" type="text" class="validate" autocomplete="off">
+                <label for="phone">Teléfono</label>
+                <!-- muestra error cuando el valor en el campo es invalido -->
+                <div *ngIf="(phone.touched || phone.dirty) && phone.invalid">
+                    <span *ngIf="phone.errors.required" class="helper-text error">Ingrese su número de teléfono</span>
+                </div>
+                <!-- muestra un mensaje de dato correcto -->
+                <div *ngIf="(phone.touched || phone.dirty) && !phone.invalid">
+                    <span class="helper-text success"></span>
+                </div>
+                <!-- muestra un texto de ayuda para el usuario -->
+                <div *ngIf=" !(phone.touched || phone.dirty) && phone.invalid">
+                    <span class="helper-text"></span>
+                </div>
+            </div>
+            <div class="input-field col s12 m4">
+                <i class="material-icons prefix">email</i>
+                <input formControlName="email" id="email" type="email" class="validate" autocomplete="off">
+                <label for="email">Email</label>
+                <!-- muestra error cuando el valor en el campo es invalido -->
+                <div *ngIf="(email.touched || email.dirty) && email.invalid">
+                    <span *ngIf="email.errors.required" class="helper-text error">Debe de ingresar un correo electrónico</span>
+                </div>
+                <!-- muestra un mensaje de dato correcto -->
+                <div *ngIf="(email.touched || email.dirty) && !email.invalid">
+                    <span class="helper-text success"></span>
+                </div>
+                <!-- muestra un texto de ayuda para el usuario -->
+                <div *ngIf=" !(email.touched || email.dirty) && email.invalid">
+                    <span class="helper-text"></span>
+                </div>
+            </div>
+            <div class="input-field col s12 m4">
+                <i class="material-icons prefix">info_outline</i>
+                <input formControlName="afilation" id="afilation" type="text" class="validate">
+                <label for="afilation">Afiliación</label>
+                <!-- muestra error cuando el valor en el campo es invalido -->
+                <div *ngIf="(afilation.touched || afilation.dirty) && afilation.invalid">
+                    <span *ngIf="afilation.errors.required" class="helper-text error">Ingrese su afiliación</span>
+                </div>
+                <!-- muestra un mensaje de dato correcto -->
+                <div *ngIf="(afilation.touched || afilation.dirty) && !afilation.invalid">
+                    <span class="helper-text success"></span>
+                </div>
+                <!-- muestra un texto de ayuda para el usuario -->
+                <div *ngIf=" !(afilation.touched || afilation.dirty) && afilation.invalid">
+                    <span class="helper-text"></span>
+                </div>
+            </div>
+            <div class="input-field col s12 m4">
+                <select formControlName="level_education">
+                    <option value="" selected>Seleccione Nivel de formación </option>
+                    <option class="blue-text" value="pregrado">Pregrado</option>
+                    <option class="blue-text" value="especializacion">Especialización</option>
+                    <option class="blue-text" value="magister">Magister</option>
+                    <option class="blue-text" value="phd">PhD</option>
+                </select>
+                <label>Nivel de formación </label>
+                <!-- muestra error cuando el valor en el campo es invalido -->
+                <div *ngIf="(level_education.touched || level_education.dirty) && level_education.invalid">
+                    <span *ngIf="level_education.errors.required" class="helper-text error">Seleccione el nivel de formación</span>
+                </div>
+                <!-- muestra un mensaje de dato correcto -->
+                <div *ngIf="(level_education.touched || level_education.dirty) && !level_education.invalid">
+                    <span class="helper-text success"></span>
+                </div>
+                <!-- muestra un texto de ayuda para el usuario -->
+                <div *ngIf=" !(level_education.touched || level_education.dirty) && level_education.invalid">
+                    <span class="helper-text"></span>
+                </div>
+            </div>
+            <div class="input-field col s12 m4">
+                <i class="material-icons prefix">fingerprint</i>
+                <input formControlName="password" id="password" type="password" class="validate">
+                <label for="password">Contraseña</label>
+                <!-- muestra error cuando el valor en el campo es invalido -->
+                <div *ngIf="(password.touched || password.dirty) && password.invalid">
+                    <span *ngIf="password.errors.required" class="helper-text error">Debe ingresar una contraseña</span>
+                    <span *ngIf="password.errors.minlength" class="helper-text error">Debe ingresar una contraseña válida minimo 8 caracteres</span>
+                </div>
+                <!-- muestra un mensaje de dato correcto -->
+                <div *ngIf="(password.touched || password.dirty) && !password.invalid">
+                    <span class="helper-text success">Contraseña correcto</span>
+                </div>
+                <!-- muestra un texto de ayuda para el usuario -->
+                <div *ngIf=" !(password.touched || password.dirty) && password.invalid">
+                    <span class="helper-text"></span>
+                </div>
+            </div>
+            <div class="col s12 center">
+                <button type="submit" class="btn waves-effect waves-light blue">
+                    <i class="material-icons right">send</i>
+                    Registrarse como autor
+                </button>
+                <br>
+                <br>
+            </div>
         </div>
-        <div class="input-field col s12 m4">
-            <i class="material-icons prefix">info_outline</i>
-            <input [(ngModel)]="dataAuthor.second_name" id="second_name" type="text" class="validate" autocomplete="off">
-            <label for="second_name">Segundo Nombre</label>
-        </div>
-        <div class="input-field col s12 m4">
-            <i class="material-icons prefix">info_outline</i>
-            <input [(ngModel)]="dataAuthor.first_last_name" id="first_last_name" type="text" class="validate" autocomplete="off">
-            <label for="first_last_name">Primer Apellido</label>
-        </div>
-        <div class="input-field col s12 m4">
-            <i class="material-icons prefix">info_outline</i>
-            <input [(ngModel)]="dataAuthor.second_last_name" id="second_last_name" type="text" class="validate" autocomplete="off">
-            <label for="second_last_name">Segundo Apellido</label>
-        </div>
-        <div class="input-field col s12 m4">
-            <i class="material-icons prefix">location_on</i>
-            <input [(ngModel)]="dataAuthor.country" id="country" type="text" class="validate" autocomplete="off">
-            <label for="country">Pais</label>
-        </div>
-        <div class="input-field col s12 m4">
-            <i class="material-icons prefix">local_phone</i>
-            <input [(ngModel)]="dataAuthor.phone" id="phone" type="text" class="validate" autocomplete="off">
-            <label for="phone">Teléfono</label>
-        </div>
-        <div class="input-field col s12 m4">
-            <i class="material-icons prefix">email</i>
-            <input [(ngModel)]="dataUser.email" id="email" type="email" class="validate" autocomplete="off">
-            <label for="email">Email</label>
-        </div>
-        <div class="input-field col s12 m4">
-            <i class="material-icons prefix">info_outline</i>
-            <input [(ngModel)]="dataAuthor.afilation" id="afilation" type="text" class="validate">
-            <label for="afilation">Afiliación</label>
-        </div>
-        <div class="input-field col s12 m4">
-            <select [(ngModel)]="dataAuthor.level_education">
-                <option value="" disabled selected>Seleccione Nivel de formación </option>
-                <option class="blue-text" value="pregrado">Pregrado</option>
-                <option class="blue-text" value="especializacion">Especialización</option>
-                <option class="blue-text" value="magister">Magister</option>
-                <option class="blue-text" value="phd">PhD</option>
-            </select>
-            <label>Nivel de formación </label>
-        </div>
-        <div class="input-field col s12 m4">
-            <i class="material-icons prefix">fingerprint</i>
-            <input [(ngModel)]="dataUser.password" id="password" type="password" class="validate">
-            <label for="password">Contraseña</label>
-        </div>
-        <div class="col s12 center">
-            <button (click)="register()" class="btn waves-effect waves-light blue">
-                <i class="material-icons right">send</i>
-                Registrarse como autor
-            </button>
-            <br>
-            <br>
-        </div>
-    </div>
-    <br>
+        <br>
+    </form>
 </div>

@@ -35,16 +35,16 @@
     <!-- Usuario author -->
     <ul *ngIf="rol == 1" class="blue sidenav" id="mobile-demo">
         <li><a class="white-text" routerLink="#">Registrar Articulo</a></li>
-        <li><a routerLink="logout">Cerrar Sesión</a></li>
+        <li><a class="white-text" routerLink="logout">Cerrar Sesión</a></li>
     </ul>
     <!-- Usuario editor -->
     <ul *ngIf="rol == 2" class="blue sidenav" id="mobile-demo">
         <li><a class="white-text" routerLink="#">Editor</a></li>
-        <li><a routerLink="logout">Cerrar Sesión</a></li>
+        <li><a class="white-text" routerLink="logout">Cerrar Sesión</a></li>
     </ul>
     <!-- Usuario evaluador -->
     <ul *ngIf="rol == 3" class="blue sidenav" id="mobile-demo">
         <li><a class="white-text" routerLink="#">Evaluar</a></li>
-        <li><a routerLink="logout">Cerrar Sesión</a></li>
+        <li><a class="white-text" routerLink="logout">Cerrar Sesión</a></li>
     </ul>
 </div>

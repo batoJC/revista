@@ -8,6 +8,8 @@ import { ResetComponent } from './reset/reset.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AuthRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ]
 })
 export class AuthModule { }

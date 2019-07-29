@@ -82,3 +82,15 @@
 .input-field label.active {
     color: #2196f3 !important;
 }
+
+.input-field div span.helper-text.error{
+    color: #F44336;
+}
+
+.input-field div span.helper-text.success{
+    color: #4CAF50;
+}
+
+.swal2-styled.swal2-confirm{
+    background-color:  #2196f3 !important;
+}
