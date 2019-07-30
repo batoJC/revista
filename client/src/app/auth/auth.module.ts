@@ -9,7 +9,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { RecaptchaModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -20,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    RecaptchaModule
   ]
 })
 export class AuthModule { }

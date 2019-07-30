@@ -39,6 +39,9 @@
                     <span class="helper-text">Ingrese su contraseña</span>
                 </div>
             </div>
+            <div class="input-field col s12 center">
+                <re-captcha (resolved)="resolved($event)" siteKey="6LfaN7AUAAAAAEg4G67MXj6fsZE1psStk7PrSJVy"></re-captcha>
+            </div>
             <a routerLink="../reset">Olvide mi Contraseña</a>
             <div class="col s12 center">
                 <br>

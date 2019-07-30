@@ -9,7 +9,16 @@ export class ResetComponent implements OnInit {
 
   constructor() { }
 
+  token = '';
+
   ngOnInit() {
   }
+
+  
+  resolved(captchaResponse: string) {
+      this.token = captchaResponse;
+  }
+    
+
 
 }

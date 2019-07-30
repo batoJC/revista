@@ -19,15 +19,15 @@ declare const iniciarSelect: any;
 export class RegisterComponent implements OnInit {
 
   constructor(private authorService: AuthorService, private userService: UserService, private router: Router, private spinner: NgxSpinnerService) {
-    // this.spinner.show();
     this.registerData = this.formGroupCreator();
-    // this.spinner.hide();
     this.spinner.show();
-      setTimeout(()=>{
-        this.spinner.hide();
-      },2000);
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
 
   }
+
+  token: string = '';
 
   registerData: FormGroup;
 
@@ -95,6 +95,14 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     if (this.registerData.valid) {
+      //verificar token
+      if (this.token == '') {
+        Swal.fire(
+          'Error!',
+          'Debe verificar que no es un robot',
+          'error');
+        return;
+      }
       this.spinner.show();
       let dataUser: UserModel = {
         id: null,
@@ -136,6 +144,11 @@ export class RegisterComponent implements OnInit {
     } else {
       Swal.fire('Error!', 'Debe de completar todos los datos correctamente', 'error');
     }
+  }
+
+
+  resolved(captchaResponse: string) {
+    this.token = captchaResponse;
   }
 
 

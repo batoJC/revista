@@ -14,7 +14,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private serviceAuth: UserauthService,private route: Router) {
     this.loginData = this.formGroupCreator();
-   }
+  }
+  
+  token = '';
+  
 
   loginData: FormGroup;
 
@@ -33,27 +36,44 @@ export class LoginComponent implements OnInit {
     return this.loginData.get('password');
   }
 
-  /*email: string = '';
-  password: string = '';*/
-
   ngOnInit() {
   }
 
   login():void{
     if(this.loginData.valid){
+      //verificar token
+      if( this.token == ''){
+        Swal.fire(
+          'Error!',
+          'Debe verificar que no es un robot',
+          'error');
+        return;
+      }
       let email = this.loginData.get('email').value;
       let password = this.loginData.get('password').value;
       this.serviceAuth.loginUser(email,password).subscribe(item => {
         this.serviceAuth.saveToken(item.id);
         this.serviceAuth.saveUserInformation(item.user);
         this.route.navigate(['/']);
+      },(error)=>{
+        Swal.fire(
+          'Error!',
+          'Las credenciales ingresadas no son correctas',
+          'error');
       });
     }else{
       Swal.fire(
-        'Erorr!',
+        'Error!',
         'Por favor verifica que todos los campos sean correctos',
         'error');
     }
   }
+
+  
+
+  resolved(captchaResponse: string) {
+      this.token = captchaResponse;
+  }
+
 
 }
