@@ -14,7 +14,7 @@ export class AuthorGuard implements  CanActivate {
 
   canActivate(){
     let user = this.userService.getUserInformation();
-    if(user.id == 1){
+    if(user.rol == 1){
       return true;
     }else{
       this.router.navigate(["/"]);

@@ -14,7 +14,7 @@ export class AssesorGuard implements  CanActivate {
 
   canActivate(){
     let user = this.userService.getUserInformation();
-    if(user.id == 3){
+    if(user.rol == 3){
       return true;
     }else{
       this.router.navigate(["/"]);

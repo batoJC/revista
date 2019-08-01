@@ -24,7 +24,6 @@ export class RegisterComponent implements OnInit {
     setTimeout(() => {
       this.spinner.hide();
     }, 1000);
-
   }
 
   token: string = '';

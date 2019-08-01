@@ -2,6 +2,52 @@ function iniciar() {
     M.Sidenav.init(document.querySelectorAll('.sidenav'), {});
 }
 
-function iniciarSelect(){
+document.addEventListener('DOMContentLoaded', function () {
+
+});
+
+
+function iniciarSelect() {
     M.FormSelect.init(document.querySelectorAll('select'), {});
+}
+
+
+function closeModal(id) {
+    var element = document.querySelector('#' + id);
+    let instance = M.Modal.getInstance(element);
+    instance.close();
+}
+
+function openModal(id, title) {
+    try {
+        var elems = document.querySelectorAll('.modal');
+        M.Modal.init(elems, {});
+        console.log(document.querySelector('#' + id));
+        var modal = document.querySelector('#' + id);
+        var titulo = document.querySelector('#modal-title');
+        titulo.innerHTML = title;
+        let instance = M.Modal.getInstance(modal);
+        instance.open();
+    } catch (err) {
+
+    }
+}
+
+function activeLabels() {
+    var labels = document.querySelectorAll('.input-field label');
+    console.log(labels);
+    labels.forEach(element => {
+        console.log(element.htmlFor);
+        if (element.htmlFor != 'level_education') {
+            element.className = 'active';
+        }
+    });
+}
+
+function disableLabels() {
+    var labels = document.querySelectorAll('.input-field label');
+    console.log(labels);
+    labels.forEach(element => {
+        element.className = '';
+    });
 }

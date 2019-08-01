@@ -24,7 +24,7 @@
         "string"
       ]
     },
-    "author _id": {
+    "author_id": {
       "type": "string",
       "required": true
     },

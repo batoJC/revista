@@ -7,13 +7,15 @@ import { FooterComponent } from './template/footer/footer.component';
 import { NavComponent } from './template/nav/nav.component';
 import { ListComponent } from './template/list/list.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MessagesComponent } from './template/messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     NavComponent,
-    ListComponent
+    ListComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

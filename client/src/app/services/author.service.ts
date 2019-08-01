@@ -14,7 +14,6 @@ export class AuthorService {
   constructor(private http: HttpClient) { }
 
   createNew(author: AuthorModel):Observable<AuthorModel>{
-    console.log('buu');
     return this.http.post<AuthorModel>(`${base_url}authors`,author,
       {
         headers: new HttpHeaders({
