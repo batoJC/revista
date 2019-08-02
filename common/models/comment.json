@@ -11,7 +11,7 @@
       "type": "string",
       "required": true
     },
-    "article": {
+    "article_id": {
       "type": "string",
       "required": true
     },
@@ -22,10 +22,25 @@
     "body": {
       "type": "string",
       "required": true
+    },
+    "stars": {
+      "type": "number",
+      "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "article": {
+      "type": "belongsTo",
+      "model": "article",
+      "foreignKey": "article_id"
+    },
+    "assessor": {
+      "type": "belongsTo",
+      "model": "assessor",
+      "foreignKey": "assessor_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

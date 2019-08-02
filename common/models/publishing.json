@@ -12,7 +12,7 @@
       "required": true
     },
     "level": {
-      "type": "string",
+      "type": "number",
       "required": true
     },
     "description": {
@@ -22,10 +22,21 @@
     "max_date": {
       "type": "date",
       "required": true
+    },
+    "state": {
+      "type": "boolean",
+      "required": false,
+      "default" : true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "articles": {
+      "type": "hasMany",
+      "model": "article",
+      "foreignKey": "publishing_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

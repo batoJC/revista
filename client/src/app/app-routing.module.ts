@@ -16,7 +16,7 @@ const routes: Routes = [
     path: 'messages',
     component: MessagesComponent,
     canActivate: [
-      LogedGuard,EditorGuard
+      LogedGuard
     ]
   },
 ];

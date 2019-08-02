@@ -5,13 +5,13 @@ import { EditorRoutingModule } from './editor-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { EditorsComponent } from './editors/editors.component';
 import { AssesorsComponent } from './assesors/assesors.component';
-import { EditionsComponent } from './editions/editions.component';
+import { PublishingComponent } from './publishing/publishing.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { StatisticsComponent } from './statistics/statistics.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [EditorsComponent, AssesorsComponent, EditionsComponent, ArticlesComponent, StatisticsComponent],
+  declarations: [EditorsComponent, AssesorsComponent, PublishingComponent, ArticlesComponent, StatisticsComponent],
   imports: [
     CommonModule,
     EditorRoutingModule,

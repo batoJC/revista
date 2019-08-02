@@ -6,6 +6,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+function iniciarDatapicker(){
+    M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+        format:'yyyy-mm-dd'
+    });
+}
+
+function getDato(id){
+    return document.querySelector('#'+id).value;
+}
 
 function iniciarSelect() {
     M.FormSelect.init(document.querySelectorAll('select'), {});
@@ -16,6 +25,10 @@ function closeModal(id) {
     var element = document.querySelector('#' + id);
     let instance = M.Modal.getInstance(element);
     instance.close();
+}
+
+function updateTextaeras(){
+    M.textareaAutoResize(document.querySelector('textarea'));
 }
 
 function openModal(id, title) {

@@ -4,8 +4,9 @@ import { EditorsComponent } from './editors/editors.component';
 import { LogedGuard } from '../guards/loged.guard';
 import { EditorGuard } from '../guards/editor.guard';
 import { AssesorsComponent } from './assesors/assesors.component';
-import { EditionsComponent } from './editions/editions.component';
+import { PublishingComponent } from './publishing/publishing.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ArticlesComponent } from './articles/articles.component';
 
 const routes: Routes = [
   {
@@ -24,14 +25,14 @@ const routes: Routes = [
   },
   {
     path: 'editions',
-    component: EditionsComponent,
+    component: PublishingComponent,
     canActivate: [
       LogedGuard,EditorGuard
     ]
   },
   {
     path: 'articles/:edition',
-    component: EditionsComponent,
+    component: ArticlesComponent,
     canActivate: [
       LogedGuard,EditorGuard
     ]
