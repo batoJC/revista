@@ -33,9 +33,6 @@ export class LoginComponent implements OnInit {
     return this.loginData.get('password');
   }
 
-  /*email: string = '';
-  password: string = '';*/
-
   ngOnInit() {
   }
 
@@ -47,10 +44,15 @@ export class LoginComponent implements OnInit {
         this.serviceAuth.saveToken(item.id);
         this.serviceAuth.saveUserInformation(item.user);
         this.route.navigate(['/']);
+      },(error)=>{
+        Swal.fire(
+          'Error!',
+          'Verifique que los datos de sesión sean corectos',
+          'error');
       });
     }else{
       Swal.fire(
-        'Erorr!',
+        'Error!',
         'Por favor verifica que todos los campos sean correctos',
         'error');
     }
