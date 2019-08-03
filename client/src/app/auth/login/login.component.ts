@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'util';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,16 @@ import Swal from'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private serviceAuth: UserauthService,private route: Router) {
+  constructor(private serviceAuth: UserauthService,private route: Router, private spinner: NgxSpinnerService) {
     this.loginData = this.formGroupCreator();
-   }
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 1000);
+  }
+  
+  token = '';
+  
 
   loginData: FormGroup;
 
@@ -38,16 +46,28 @@ export class LoginComponent implements OnInit {
 
   login():void{
     if(this.loginData.valid){
+      //verificar token
+      if( this.token == ''){
+        Swal.fire(
+          'Error!',
+          'Debe verificar que no es un robot',
+          'error');
+        return;
+      }
+      this.spinner.show();
       let email = this.loginData.get('email').value;
       let password = this.loginData.get('password').value;
       this.serviceAuth.loginUser(email,password).subscribe(item => {
         this.serviceAuth.saveToken(item.id);
         this.serviceAuth.saveUserInformation(item.user);
         this.route.navigate(['/']);
+        this.spinner.hide();
+
       },(error)=>{
+        this.spinner.hide();
         Swal.fire(
           'Error!',
-          'Verifique que los datos de sesión sean corectos',
+          'Las credenciales ingresadas no son correctas',
           'error');
       });
     }else{
@@ -57,5 +77,12 @@ export class LoginComponent implements OnInit {
         'error');
     }
   }
+
+  
+
+  resolved(captchaResponse: string) {
+      this.token = captchaResponse;
+  }
+
 
 }

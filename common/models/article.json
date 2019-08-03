@@ -24,7 +24,7 @@
         "string"
       ]
     },
-    "author _id": {
+    "author_id": {
       "type": "string",
       "required": true
     },
@@ -50,7 +50,23 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "comments": {
+      "type": "hasMany",
+      "model": "comment",
+      "foreignKey": "article"
+    },
+    "publishing": {
+      "type": "belongsTo",
+      "model": "publishing",
+      "foreignKey": "publishing_id"
+    },
+    "author": {
+      "type": "belongsTo",
+      "model": "author",
+      "foreignKey": "author_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

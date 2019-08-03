@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 ::-webkit-scrollbar{
     width: 8px;
+    height: 8px;
     background-color: #F5F5F5;
 }
 ::-webkit-scrollbar-track{
@@ -93,4 +94,20 @@
 
 .swal2-styled.swal2-confirm{
     background-color:  #2196f3 !important;
+}
+
+re-captcha > div {
+    display: inherit;
+}
+
+.modal-lg{
+    width: 90% !important;
+}
+
+.modal-md{
+    width: 70% !important;
+}
+
+th,td{
+    text-align: center !important;
 }

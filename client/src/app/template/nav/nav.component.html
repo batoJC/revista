@@ -1,7 +1,7 @@
 <div class="navbar-fixed">
     <nav class="blue">
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Logo</a>
+            <a routerLink="/" class="brand-logo">Logo</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <!-- Usuario sin loguearse -->
             <ul *ngIf="rol == 0" class="right hide-on-med-and-down">
@@ -15,7 +15,11 @@
             </ul>
             <!-- Usuario editor -->
             <ul *ngIf="rol == 2" class="right hide-on-med-and-down">
-                <li><a routerLink="#">Editor</a></li>
+                <li><a routerLink="editors">Editores</a></li>
+                <li><a routerLink="assesors">Evaluadores</a></li>
+                <li><a routerLink="editions">Ediciones</a></li>
+                <li><a routerLink="messages">Mensajes</a></li>
+                <li><a routerLink="statistics">Estadíticas</a></li>
                 <li><a routerLink="logout">Cerrar Sesión</a></li>
             </ul>
             <!-- Usuario evaluador -->
@@ -39,7 +43,11 @@
     </ul>
     <!-- Usuario editor -->
     <ul *ngIf="rol == 2" class="blue sidenav" id="mobile-demo">
-        <li><a class="white-text" routerLink="#">Editor</a></li>
+            <li><a class="white-text" routerLink="editors">Editores</a></li>
+            <li><a class="white-text" routerLink="assesors">Evaluadores</a></li>
+            <li><a class="white-text" routerLink="editions">Ediciones</a></li>
+            <li><a class="white-text" routerLink="messages">Mensajes</a></li>
+            <li><a class="white-text" routerLink="statistics">Estadíticas</a></li>
         <li><a class="white-text" routerLink="logout">Cerrar Sesión</a></li>
     </ul>
     <!-- Usuario evaluador -->

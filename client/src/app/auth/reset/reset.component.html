@@ -7,6 +7,9 @@
             <input id="email" type="email" class="validate" autocomplete="off">
             <label for="email">Email</label>
         </div>
+        <div class="input-field col s12 center">
+            <re-captcha (resolved)="resolved($event)" siteKey="6LfaN7AUAAAAAEg4G67MXj6fsZE1psStk7PrSJVy"></re-captcha>
+        </div>
         <div class="col s12 center">
             <button class="btn waves-effect waves-light blue">
                 <i class="material-icons right">send</i>

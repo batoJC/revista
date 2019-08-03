@@ -1,0 +1,120 @@
+<br>
+<a href="#modalPublishing" class="waves-effect waves-light btn blue modal-trigger" (click)="openModalAdd()"><i
+        class="material-icons left">add</i> Agregar Edición </a>
+
+<!-- Modal Structure -->
+<div id="modalPublishing" class="modal modal-md">
+    <div class="modal-content">
+        <h4 class="center" id="modal-title"></h4>
+        <form [formGroup]='publishingData' (ngSubmit)="register()">
+            <div class="row">
+                <div class="col s12 m10 offset-m1">
+                    <input formControlName="id" type="hidden">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">info_outline</i>
+                        <input formControlName="name" id="name" type="text" class="validate" autocomplete="off">
+                        <label for="name">Nombre</label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(name.touched || name.dirty) && name.invalid">
+                            <span *ngIf="name.errors.required" class="helper-text error">Debe de ingresar el nombre para la edición</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(name.touched || name.dirty) && !name.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(name.touched || name.dirty) && name.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">format_list_numbered</i>
+                        <input formControlName="level" id="level" type="text" class="validate" autocomplete="off">
+                        <label for="level">Volumen</label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(level.touched || level.dirty) && level.invalid">
+                            <span *ngIf="level.errors.required" class="helper-text error">Debe ingresar el volumen de la edición</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(level.touched || level.dirty) && !level.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(level.touched || level.dirty) && level.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">dehaze</i>
+                        <textarea formControlName="description" id="description" class="materialize-textarea validate"></textarea>
+                        <label for="description">Descripción</label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(description.touched || description.dirty) && description.invalid">
+                            <span *ngIf="description.errors.required" class="helper-text error">Debe de ingresar una descripción</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(description.touched || description.dirty) && !description.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(description.touched || description.dirty) && description.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">event</i>
+                        <input formControlName="max_date" id="max_date" type="text" class="validate datepicker" autocomplete="off">
+                        <label for="max_date">Fecha Máxima</label>
+                    </div>
+                    <div class="col s12">
+                        <div class="col s6 center">
+                            <a (click)="closeModal()" class="btn waves-effect waves-light blue">
+                                Cerrar
+                            </a>
+                        </div>
+                        <div class="col s6 center">
+                            <button type="submit" class="btn waves-effect waves-light blue">Guardar</button>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </form>
+    </div>
+</div>
+
+<div class="row center-align">
+    <br>
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Volumen</th>
+                <th>Descripción</th>
+                <th>Fecha Máxima</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let publishing of listPublishings">
+                <td>{{ publishing.name }}</td>
+                <td>{{ publishing.level }}</td>
+                <td>{{ publishing.description }}</td>
+                <td>{{ publishing.max_date | date }}</td>
+                <td>
+                    <button style="margin-right: 8px;" (click)="loadData(publishing)" class="btn blue">
+                        <i class="material-icons">edit</i>
+                    </button>
+                    <a style="margin-right: 8px;" class="btn green" routerLink="../articles/{{ publishing.id }}">
+                        <i class="material-icons">remove_red_eye</i>
+                    </a>
+                    <button (click)="deletePublishing(publishing)" class="btn red">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
