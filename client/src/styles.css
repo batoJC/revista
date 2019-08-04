@@ -108,6 +108,6 @@ re-captcha > div {
     width: 70% !important;
 }
 
-th,td{
+/* th,td{ */
     /* text-align: center !important; */
-}
+/* } */

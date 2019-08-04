@@ -6,7 +6,6 @@ import { UserauthService } from 'src/app/services/userauth.service';
 import { UserModel } from 'src/app/models/user.model';
 import { CommentModel } from 'src/app/models/comment.model';
 import * as jsPDF from 'jspdf';
-import * as html2canvas from 'html2canvas';
 
 
 declare const openModal: any;
@@ -52,31 +51,34 @@ export class ListArticleComponent implements OnInit {
   }
 
   generarPDF() {
-    html2canvas(document.getElementById('commentPDF'), {
-      allowTaint: true,
-      useCORS: false,
-      scale: 0.9
-    }).then(function (canvas) {
-      console.log(canvas);
-      var img = canvas.toDataURL("image/png");
-      console.log(img);
-      var doc = new jsPDF();
-      doc.addImage(img, 'JPEG', 20, 20);
-      doc.save('comments.pdf');
-
-      // Few necessary setting options  
-      // var imgWidth = 208;   
-      // var pageHeight = 295;    
-      // var imgHeight = canvas.height * imgWidth / canvas.width;  
-      // var heightLeft = imgHeight;  
-  
-      // const contentDataURL = canvas.toDataURL('image/png')  
-      // let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
-      // var position = 0;  
-      // pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
-      // pdf.save('MYPdf.pdf'); // Generated PDF 
-
+    var doc = new jsPDF("p","pt","a4");
+    let contador = 40;
+    this.comments.forEach(element => {
+      let fecha = new Date(element.date).toString();
+      let nombre = `${element.assessor.first_name} ${element.assessor.second_name} ${element.assessor.first_last_name} ${element.assessor.second_last_name}`;
+      let body = doc.splitTextToSize(element.body, 680);
+      let underLine = '______________________________________________';
+      doc.setFontSize(10);
+      doc.setTextColor(0,0,255);
+      doc.text(30, contador,fecha);
+      doc.setTextColor(0,0,0);
+      contador += 20;
+      doc.setFontSize(20);
+      doc.text(50, contador,nombre);
+      contador += 15;
+      doc.setFontSize(12);
+      doc.text(50, contador,body);
+      contador += (body.length * 10) + 15;
+      doc.setFontSize(8);
+      doc.setTextColor(0,0,255);
+      doc.text(50,contador,`${element.stars} Estrellas`);
+      doc.setTextColor(150);
+      contador += 10;
+      doc.text(0, contador,underLine+underLine+underLine);
     });
+    // doc.output('datauri');
+
+    doc.save('comments.pdf');
   }
 
 }
