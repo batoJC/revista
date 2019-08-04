@@ -43,10 +43,17 @@ export class PublishingService {
     return this.http.delete<PublishingModel>(`${base_url}publishings/${publishingId}`);
   };
 
-  //searcha publishing
+  //search publishing
   searchPublishing(id:string): Observable<PublishingModel>{
     return this.http.get<PublishingModel>(`${base_url}publishings/${id}`)
     
   }
+
+  //search a publishing active
+  getActive():Observable<PublishingModel>{
+    let filter = JSON.stringify({"where":{'state': true }});
+    return this.http.get<PublishingModel>(`${base_url}publishings/findOne?filter=${filter}`);
+  }
+
 
 }

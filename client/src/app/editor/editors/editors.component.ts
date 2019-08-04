@@ -151,6 +151,9 @@ export class EditorsComponent implements OnInit {
             this.spinner.hide();
             Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
           });
+        }, (err) => {
+          this.spinner.hide();
+          Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
         });
       }
 
@@ -186,6 +189,9 @@ export class EditorsComponent implements OnInit {
             this.spinner.hide();
             Swal.fire('Error!', 'Ocurrió un error al editar el registro', 'error');
           });
+        }, (err) => {
+          this.spinner.hide();
+          Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
         });
       }
     } else {
@@ -199,6 +205,20 @@ export class EditorsComponent implements OnInit {
     this.editorService.loadEditors().subscribe((item) => {
       this.listEditors = item;
       this.spinner.hide();
+    }, (err) => {
+      this.spinner.hide();
+      Swal.fire({
+        title: 'Error!', 
+        text: 'Ocurrió un error al cargar los registros,¿Desea intentar de nuevo?', 
+        type : 'error',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then((res)=>{
+        if(res){
+          this.loadEditorsData();
+        }
+      });
     });
   }
 

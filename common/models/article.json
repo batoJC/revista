@@ -54,7 +54,7 @@
     "comments": {
       "type": "hasMany",
       "model": "comment",
-      "foreignKey": "article"
+      "foreignKey": "article_id"
     },
     "publishing": {
       "type": "belongsTo",

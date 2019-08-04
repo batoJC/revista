@@ -16,7 +16,9 @@ const base_url = 'http://localhost:3000/api/';
 
 export class UserauthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+
+  }
 
   tokenId: string = '';
   secretKey = 'una-contraseña';
@@ -51,16 +53,19 @@ export class UserauthService {
 
   saveUserInformation(user: UserModel): void {
     let encryptedData = CryptoJS.AES.encrypt(JSON.stringify(user), this.secretKey).toString();
-    console.log(encryptedData);
     localStorage.setItem("userInfo", encryptedData);
   }
 
   getUserInformation() {
     let userInfo = localStorage.getItem("userInfo");
     if(!isNullOrUndefined(userInfo)){
-      let valor = CryptoJS.AES.decrypt(userInfo.toString(), this.secretKey);
-      var textoDesencriptado = valor.toString(CryptoJS.enc.Utf8);
-      return (JSON.parse(textoDesencriptado));
+      try {
+        let valor = CryptoJS.AES.decrypt(userInfo.toString(), this.secretKey);
+        var textoDesencriptado = valor.toString(CryptoJS.enc.Utf8);
+        return (JSON.parse(textoDesencriptado));
+      } catch (error) {
+        this.logoutUser();
+      }
     }
     return userInfo;
   }

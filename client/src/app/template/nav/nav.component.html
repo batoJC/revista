@@ -10,7 +10,8 @@
             </ul>
             <!-- Usuario author -->
             <ul *ngIf="rol == 1" class="right hide-on-med-and-down">
-                <li><a routerLink="#">Registrar Articulo</a></li>
+                <li><a routerLink="addArticle">Registrar Artículo</a></li>
+                <li><a routerLink="listArticles">Mis Artículos</a></li>
                 <li><a routerLink="logout">Cerrar Sesión</a></li>
             </ul>
             <!-- Usuario editor -->
@@ -38,7 +39,8 @@
     </ul>
     <!-- Usuario author -->
     <ul *ngIf="rol == 1" class="blue sidenav" id="mobile-demo">
-        <li><a class="white-text" routerLink="#">Registrar Articulo</a></li>
+        <li><a class="white-text" routerLink="addArticle">Registrar Artículo</a></li>
+        <li><a class="white-text" routerLink="listArticles">Mis Artículos</a></li>
         <li><a class="white-text" routerLink="logout">Cerrar Sesión</a></li>
     </ul>
     <!-- Usuario editor -->

@@ -109,5 +109,5 @@ re-captcha > div {
 }
 
 th,td{
-    text-align: center !important;
+    /* text-align: center !important; */
 }

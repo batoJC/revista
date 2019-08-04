@@ -1,0 +1,22 @@
+.comment p{
+    font-family: sans-serif;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.comment span{
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+.comment h5{
+    margin-top: 3px; 
+}
+
+div.stars{
+    display: inline;
+}
+
+.star{
+    display: inline;
+}
