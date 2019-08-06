@@ -55,5 +55,10 @@ export class PublishingService {
     return this.http.get<PublishingModel>(`${base_url}publishings/findOne?filter=${filter}`);
   }
 
+  //poner todas las ediciones en false
+  setState():Observable<any>{
+    return this.http.post<any>(`${base_url}publishings/update?where={}`,{"state":false});
+  }
+
 
 }

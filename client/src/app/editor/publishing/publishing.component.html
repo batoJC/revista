@@ -29,7 +29,7 @@
                     </div>
                     <div class="input-field col s12">
                         <i class="material-icons prefix">format_list_numbered</i>
-                        <input formControlName="level" id="level" type="text" class="validate" autocomplete="off">
+                        <input formControlName="level" id="level" type="number" class="validate" autocomplete="off">
                         <label for="level">Volumen</label>
                         <!-- muestra error cuando el valor en el campo es invalido -->
                         <div *ngIf="(level.touched || level.dirty) && level.invalid">

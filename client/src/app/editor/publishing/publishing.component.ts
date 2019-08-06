@@ -101,19 +101,22 @@ export class PublishingComponent implements OnInit {
           id: null
         };
 
-        this.publishingService.createNew(dataPublishing).subscribe(item => {
-          this.spinner.hide();
-          Swal.fire('Logrado!',
-            'Se ha registrado Correctamente el editor',
-            'success').then(() => {
-              this.publishingData = this.formGroupCreator();
-              this.closeModal();
-              this.loadPublishingsData();
-            });
-        }, (err) => {
-          this.spinner.hide();
-          Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
+        this.publishingService.setState().subscribe((item)=>{
+          this.publishingService.createNew(dataPublishing).subscribe(item => {
+            this.spinner.hide();
+            Swal.fire('Logrado!',
+              'Se ha registrado Correctamente el editor',
+              'success').then(() => {
+                this.publishingData = this.formGroupCreator();
+                this.closeModal();
+                this.loadPublishingsData();
+              });
+          }, (err) => {
+            this.spinner.hide();
+            Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
+          });
         });
+        
       }
 
 
