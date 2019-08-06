@@ -7,6 +7,7 @@ import { MessagesComponent } from './template/messages/messages.component';
 import { LogedGuard } from './guards/loged.guard';
 import { EditorGuard } from './guards/editor.guard';
 import { AuthorModule } from './author/author.module';
+import { AssessorModule } from './assessor/assessor.module';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     AuthModule,
     AuthorModule,
-    EditorModule
+    EditorModule,
+    AssessorModule
   ],
   exports: [RouterModule]
 })

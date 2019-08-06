@@ -25,7 +25,7 @@
             </ul>
             <!-- Usuario evaluador -->
             <ul *ngIf="rol == 3" class="right hide-on-med-and-down">
-                <li><a routerLink="#">Evaluar</a></li>
+                <li><a routerLink="evaluar">Evaluar</a></li>
                 <li><a routerLink="logout">Cerrar Sesión</a></li>
             </ul>
         </div>
@@ -45,16 +45,16 @@
     </ul>
     <!-- Usuario editor -->
     <ul *ngIf="rol == 2" class="blue sidenav" id="mobile-demo">
-            <li><a class="white-text" routerLink="editors">Editores</a></li>
-            <li><a class="white-text" routerLink="assesors">Evaluadores</a></li>
-            <li><a class="white-text" routerLink="editions">Ediciones</a></li>
-            <li><a class="white-text" routerLink="messages">Mensajes</a></li>
-            <li><a class="white-text" routerLink="statistics">Estadíticas</a></li>
+        <li><a class="white-text" routerLink="editors">Editores</a></li>
+        <li><a class="white-text" routerLink="assesors">Evaluadores</a></li>
+        <li><a class="white-text" routerLink="editions">Ediciones</a></li>
+        <li><a class="white-text" routerLink="messages">Mensajes</a></li>
+        <li><a class="white-text" routerLink="statistics">Estadíticas</a></li>
         <li><a class="white-text" routerLink="logout">Cerrar Sesión</a></li>
     </ul>
     <!-- Usuario evaluador -->
     <ul *ngIf="rol == 3" class="blue sidenav" id="mobile-demo">
-        <li><a class="white-text" routerLink="#">Evaluar</a></li>
+        <li><a class="white-text" routerLink="evaluar">Evaluar</a></li>
         <li><a class="white-text" routerLink="logout">Cerrar Sesión</a></li>
     </ul>
 </div>

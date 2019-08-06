@@ -56,8 +56,9 @@ export class ListArticleComponent implements OnInit {
     this.comments.forEach(element => {
       let fecha = new Date(element.date).toString();
       let nombre = `${element.assessor.first_name} ${element.assessor.second_name} ${element.assessor.first_last_name} ${element.assessor.second_last_name}`;
-      let body = doc.splitTextToSize(element.body, 680);
-      let underLine = '______________________________________________';
+      let body = null;
+      doc.setFontSize(12);
+      body = doc.splitTextToSize(element.body, 480);
       doc.setFontSize(10);
       doc.setTextColor(0,0,255);
       doc.text(30, contador,fecha);
@@ -72,9 +73,7 @@ export class ListArticleComponent implements OnInit {
       doc.setFontSize(8);
       doc.setTextColor(0,0,255);
       doc.text(50,contador,`${element.stars} Estrellas`);
-      doc.setTextColor(150);
-      contador += 10;
-      doc.text(0, contador,underLine+underLine+underLine);
+      contador += 20
     });
     // doc.output('datauri');
 

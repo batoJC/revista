@@ -35,6 +35,7 @@ export class ArticlesComponent implements OnInit {
     state: '',
     file: '',
     assessors: [],
+    comments: [],
     id: '',
   };
 
