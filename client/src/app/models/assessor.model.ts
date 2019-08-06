@@ -7,6 +7,8 @@ export interface AssessorModel {
     phone: string;
     level_education: string;
     afilation: string;
+    specialty: string;
     user_id: string;
+    author_id: string;
     id: string;
 }
