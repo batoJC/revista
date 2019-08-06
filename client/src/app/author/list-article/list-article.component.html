@@ -37,7 +37,7 @@
                 <th>Nombre</th>
                 <th>Fecha</th>
                 <th>Estado</th>
-                <th>Opciones</th>
+                <th class="center">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -46,21 +46,21 @@
                 <td>{{ article.title }}</td>
                 <td>{{ article.date | date }}</td>
                 <td>{{ article.state | uppercase }}</td>
-                <td>
-                    <!-- descargar archivo -->
+                <td class="center">
+                    <!-- descargar archivo  -->
                     <button style="margin-right: 8px;" class="btn blue">
                         <i class="material-icons">cloud_download</i>
                     </button>
                     <!-- cargar archivo -->
-                    <button style="margin-right: 8px;" class="btn blue">
+                    <button *ngIf="article.state == 'aceptado con cambios'" style="margin-right: 8px;" class="btn blue">
                         <i class="material-icons">cloud_upload</i>
                     </button>
                     <!-- comentarios  *ngIf="article.state == 'enviada'" -->
-                    <button (click)="commentsByArticle(article.id)" style="margin-right: 8px;" class="btn red">
+                    <button *ngIf="article.state != 'enviado'" (click)="commentsByArticle(article.id)" style="margin-right: 8px;" class="btn red">
                         <i class="material-icons">comment</i>
                     </button>
                     <!-- editar -->
-                    <a style="margin-right: 8px;" routerLink="../editArticle/{{ article.id }}" class="btn green">
+                    <a *ngIf="article.state == 'enviado'" style="margin-right: 8px;" routerLink="../editArticle/{{ article.id }}" class="btn green">
                         <i class="material-icons">edit</i>
                     </a>
                 </td>
