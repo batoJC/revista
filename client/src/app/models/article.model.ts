@@ -1,3 +1,5 @@
+import { CommentModel } from './comment.model';
+
 export interface ArticleModel {
     title: string;
     abstract: string;
@@ -9,5 +11,6 @@ export interface ArticleModel {
     state: string;
     file: string;
     assessors: string[];
+    comments: CommentModel[];
     id: string;
 }

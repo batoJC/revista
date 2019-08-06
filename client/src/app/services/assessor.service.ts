@@ -40,4 +40,10 @@ export class AssessorService {
   deleteAssessor(assessorId: String): Observable<AssessorModel> {
     return this.http.delete<AssessorModel>(`${base_url}assessors/${assessorId}`);
   };
+
+  findByIdUser(id:string):Observable<AssessorModel[]>{
+    let filter = JSON.stringify({"where":{'user_id': id }});
+    return this.http.get<AssessorModel[]>(`${base_url}assessors?filter=${filter}`);
+  }
+
 }

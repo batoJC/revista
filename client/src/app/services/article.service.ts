@@ -39,11 +39,11 @@ export class ArticleService {
 
   //find information the artocle with id
   searchById(id:string):Observable<ArticleModel>{
-    return this.http.get<ArticleModel>(`${base_url}articles/${id}`);
+    return this.http.get<ArticleModel>(`${base_url}articles/${id}?filter[include]=comments`);
   }
 
   //edit article
-  update(article: ArticleModel): Observable<ArticleModel> {
+  update(article: ArticleModel):Observable<ArticleModel>{
     return this.http.put<ArticleModel>(`${base_url}articles/${article.id}`, article,
       {
         headers: new HttpHeaders({
@@ -53,8 +53,15 @@ export class ArticleService {
   }
 
   //list of comments for one article
-  comments(article:string){
+  comments(article:string): Observable<CommentModel[]>{
     return this.http.get<CommentModel[]>(`${base_url}articles/${article}/comments?filter[include]=assessor`);
+  }
+
+  // list of articles from assessor
+  loadArticleByAssessor(assessor_id):Observable<ArticleModel[]>{
+    let filter = JSON.stringify({"where":{'assessors': 'id'+assessor_id }});
+    console.log(filter);
+    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}`);
   }
 
 }

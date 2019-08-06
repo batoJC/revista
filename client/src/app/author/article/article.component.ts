@@ -196,6 +196,7 @@ export class ArticleComponent implements OnInit {
         state: 'enviado',
         file: 'archivo',
         assessors: [],
+        comments: [],
         id: null
       }
 

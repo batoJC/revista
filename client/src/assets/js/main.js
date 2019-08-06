@@ -37,7 +37,7 @@ function openModal(id, title) {
         M.Modal.init(elems, {});
         console.log(document.querySelector('#' + id));
         var modal = document.querySelector('#' + id);
-        var titulo = document.querySelector('#modal-title');
+        var titulo = document.querySelector(`#${id} div h4`);
         titulo.innerHTML = title;
         let instance = M.Modal.getInstance(modal);
         instance.open();

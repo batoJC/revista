@@ -5,7 +5,7 @@ export interface CommentModel {
     article_id: string;
     date: Date;
     body: string;
-    stars: Number;
+    stars: number;
     id: string;
     assessor: AssessorModel
 }

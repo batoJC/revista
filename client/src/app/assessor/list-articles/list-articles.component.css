@@ -1,0 +1,38 @@
+.clasificacion {
+    text-align: center;
+    margin-bottom: 2px !important;
+}
+
+.clasificacion label {
+    font-size: 60px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    color: grey;
+}
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+label:hover, label:hover~label {
+    color: #2196f3;
+}
+
+input[type="radio"]:checked~label {
+    color: #2196f3;
+}
+
+div.stars{
+    font-size: 60px;
+    display: inline;
+}
+
+.star{
+    display: inline;
+}

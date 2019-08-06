@@ -1,0 +1,116 @@
+<div id="evaluarModal" class="modal">
+    <div class="modal-content">
+        <h4 class="center" id="modal-title"></h4>
+        <div class="row">
+            <form id="formEvaluar" [formGroup]='commentData' (ngSubmit)="registrar()">
+                <!-- stars -->
+                <p class="clasificacion">
+                    <input id="radio1" type="radio" formControlName="stars" value="5">
+                    <!--
+                    --><label for="radio1">★</label>
+                    <!--
+                    --><input id="radio2" type="radio" formControlName="stars" value="4">
+                    <!--
+                    --><label for="radio2">★</label>
+                    <!--
+                    --><input id="radio3" type="radio" formControlName="stars" value="3">
+                    <!--
+                    --><label for="radio3">★</label>
+                    <!--
+                    --><input id="radio4" type="radio" formControlName="stars" value="2">
+                    <!--
+                    --><label for="radio4">★</label>
+                    <!--
+                    --><input id="radio5" type="radio" formControlName="stars" value="1">
+                    <!--
+                    --><label for="radio5">★</label>
+                </p>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">info_outline</i>
+                    <textarea formControlName="body" id="body" type="text" class="validate materialize-textarea"
+                        autocomplete="off"></textarea>
+                    <label for="body">Comentario</label>
+                    <!-- muestra error cuando el valor en el campo es invalido -->
+                    <div *ngIf="(body.touched || body.dirty) && body.invalid">
+                        <span *ngIf="body.errors.required" class="helper-text error">Debe de ingresar un
+                            comentario</span>
+                    </div>
+                    <!-- muestra un mensaje de dato correcto -->
+                    <div *ngIf="(body.touched || body.dirty) && !body.invalid">
+                        <span class="helper-text success"></span>
+                    </div>
+                    <!-- muestra un texto de ayuda para el usuario -->
+                    <div *ngIf=" !(body.touched || body.dirty) && body.invalid">
+                        <span class="helper-text"></span>
+                    </div>
+                </div>
+                <br>
+                <div class="col s12 center">
+                    <button style="margin-right: 10px" class="btn blue" type="button"
+                        (click)="closeModalEvaluar()">Cerrar</button>
+                    <button class="btn blue" type="submit">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <h4 class="center" id="modal-title"></h4>
+        <div class="row">
+            <div class="col s12 center">
+                <div class="stars">
+                    <div class="stars" *ngFor="let loop of starsA(5);let i= index">
+                        <span *ngIf="coment.estars >= (i + 1)" class="star blue-text">★</span>
+                        <span *ngIf="coment.estars < (i + 1)" class="star">★</span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col s12">
+                <i class="material-icons prefix">info_outline</i>
+                <textarea id="body" type="text" class="validate materialize-textarea" autocomplete="off"
+                    readonly>{{ coment.ebody }}</textarea>
+                <label for="body">Comentario</label>
+            </div>
+            <br>
+            <div class="col s12 center">
+                <button style="margin-right: 10px" class="btn blue" type="button"
+                    (click)="closeModalInfo()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Lista de artículos para evaluar</h3>
+
+<div class="row">
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Archivo</th>
+                <th>Calificación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let article of listArticles">
+                <td>{{ article.id }}</td>
+                <td>{{ article.title }}</td>
+                <td>
+                    <!-- descargar archivo -->
+                    <button style="margin-right: 8px;" class="btn blue">
+                        <i class="material-icons">cloud_download</i>
+                    </button>
+                </td>
+                <td>
+                    <!-- comentarios  *ngIf="article.state == 'enviada'" -->
+                    <button (click)="modalEvaluar(article.id)" style="margin-right: 8px;" class="btn red">
+                        <i class="material-icons">spellcheck</i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
