@@ -15,6 +15,7 @@ declare const openModal: any;
 declare const closeModal: any;
 declare const disableLabels: any;
 declare const activeLabels: any;
+declare const updateTextaeras: any;
 
 
 @Component({
