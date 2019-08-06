@@ -1,1 +1,192 @@
-<p>assesors works!</p>
+<br>
+<a href="#modalAssessor" class="waves-effect waves-light btn blue modal-trigger" (click)="openModalAdd()"><i
+        class="material-icons left">add</i> Agregar Evaluador </a>
+
+<!-- Modal Structure -->
+<div id="modalAssessor" class="modal modal-md">
+    <div class="modal-content">
+        <h4 class="center" id="modal-title"></h4>
+        <form [formGroup]='assessorData' (ngSubmit)="register()">
+            <div class="row">
+                <div class="col s12 m10 offset-m1">
+                    <input formControlName="id" type="hidden">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">info_outline</i>
+                        <input formControlName="first_name" id="first_name" type="text" class="validate"
+                            autocomplete="off">
+                        <label for="first_name">Primer Nombre</label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(first_name.touched || first_name.dirty) && first_name.invalid">
+                            <span *ngIf="first_name.errors.required" class="helper-text error">Debe de ingresar su
+                                primer
+                                nombre</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(first_name.touched || first_name.dirty) && !first_name.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(first_name.touched || first_name.dirty) && first_name.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">info_outline</i>
+                        <input formControlName="second_name" id="second_name" type="text" class="validate"
+                            autocomplete="off">
+                        <label for="second_name">Segundo Nombre</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">info_outline</i>
+                        <input formControlName="first_last_name" id="first_last_name" type="text" class="validate"
+                            autocomplete="off">
+                        <label for="first_last_name">Primer Apellido</label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(first_last_name.touched || first_last_name.dirty) && first_last_name.invalid">
+                            <span *ngIf="first_last_name.errors.required" class="helper-text error">Ingrese su primer
+                                apellido</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(first_last_name.touched || first_last_name.dirty) && !first_last_name.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(first_last_name.touched || first_last_name.dirty) && first_last_name.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">info_outline</i>
+                        <input formControlName="second_last_name" id="second_last_name" type="text" class="validate"
+                            autocomplete="off">
+                        <label for="second_last_name">Segundo Apellido</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">location_on</i>
+                        <input formControlName="country" id="country" type="text" class="validate" autocomplete="off">
+                        <label for="country">Pais</label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(country.touched || country.dirty) && country.invalid">
+                            <span *ngIf="country.errors.required" class="helper-text error">Debe de ingresar su
+                                ciudad</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(country.touched || country.dirty) && !country.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(country.touched || country.dirty) && country.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">local_phone</i>
+                        <input formControlName="phone" id="phone" type="text" class="validate" autocomplete="off">
+                        <label for="phone">Teléfono</label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(phone.touched || phone.dirty) && phone.invalid">
+                            <span *ngIf="phone.errors.required" class="helper-text error">Ingrese su número de
+                                teléfono</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(phone.touched || phone.dirty) && !phone.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(phone.touched || phone.dirty) && phone.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">email</i>
+                        <input formControlName="email" id="email" type="email" class="validate" autocomplete="off">
+                        <label for="email">Email</label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(email.touched || email.dirty) && email.invalid">
+                            <span *ngIf="email.errors.required" class="helper-text error">Debe de ingresar un correo
+                                electrónico</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(email.touched || email.dirty) && !email.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(email.touched || email.dirty) && email.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <select id="level_education" formControlName="level_education">
+                            <option value="" selected></option>
+                            <option class="blue-text" value="pregrado">Pregrado</option>
+                            <option class="blue-text" value="especializacion">Especialización</option>
+                            <option class="blue-text" value="magister">Magister</option>
+                            <option class="blue-text" value="phd">PhD</option>
+                        </select>
+                        <label for="level_education">Nivel de formación </label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(level_education.touched || level_education.dirty) && level_education.invalid">
+                            <span *ngIf="level_education.errors.required" class="helper-text error">Seleccione el nivel
+                                de
+                                formación</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(level_education.touched || level_education.dirty) && !level_education.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(level_education.touched || level_education.dirty) && level_education.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <div class="col s6 center">
+                            <a (click)="closeModal()" class="btn waves-effect waves-light blue">
+                                Cerrar
+                            </a>
+                        </div>
+                        <div class="col s6 center">
+                            <button type="submit" class="btn waves-effect waves-light blue">Guardar</button>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </form>
+    </div>
+</div>
+
+<div class="row center-align">
+    <br>
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Ciudad</th>
+                <th>Teléfono</th>
+                <th>Nivel de educación</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let assessor of listAssessors">
+                <td>{{ assessor.first_name + " " + assessor.second_name }}</td>
+                <td>{{ assessor.first_last_name + " " + assessor.second_last_name }}</td>
+                <td>{{ assessor.country }}</td>
+                <td>{{ assessor.phone }}</td>
+                <td>{{ assessor.level_education }}</td>
+                <td>
+                    <button style="margin-right: 8px;" (click)="loadData(assessor)" class="btn blue">
+                        <i class="material-icons">edit</i>
+                    </button>
+                    <button (click)="deleteEditor(assessor)" class="btn red" >
+                        <i class="material-icons">delete</i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
