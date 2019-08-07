@@ -42,11 +42,9 @@ export class AssesorsComponent implements OnInit {
       country: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required]),
       level_education: new FormControl('', [Validators.required]),
-      afilation: new FormControl(''),
-      user_id: new FormControl(null, []),
+      specialty: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
     });
-
   }
 
   listAssessors: AssessorModel[] = [];
@@ -97,12 +95,8 @@ export class AssesorsComponent implements OnInit {
     return this.assessorData.get('level_education');
   }
 
-  get afilation() {
-    return this .assessorData.get('afilation');
-  }
-  
-  get user_id() {
-    return this.assessorData.get('user_id');
+  get specialty() {
+    return this .assessorData.get('specialty');
   }
 
   get email() {
@@ -143,9 +137,8 @@ export class AssesorsComponent implements OnInit {
           country: this.assessorData.get('country').value,
           phone: this.assessorData.get('phone').value,
           level_education: this.assessorData.get('level_education').value,
-          afilation: this.assessorData.get('afilation').value,
+          specialty: this.assessorData.get('specialty').value,
           user_id: '',
-          specialty: 'cualquiera',
           author_id: this.infoUser.id,
           state: 'pendiente de respuesta',
           id: null
@@ -189,7 +182,7 @@ export class AssesorsComponent implements OnInit {
         this.dataAssessor.country = this.assessorData.get('country').value;
         this.dataAssessor.phone = this.assessorData.get('phone').value;
         this.dataAssessor.level_education = this.assessorData.get('level_education').value;
-        this.dataAssessor.afilation = this.assessorData.get('afilation').value;
+        this.dataAssessor.specialty = this.assessorData.get('specialty').value;
 
         this.userService.updateUser(this.dataUser, this.token).subscribe((item) => {
           this.assessorService.updateAssessor(this.dataAssessor).subscribe(item => {
@@ -252,7 +245,7 @@ export class AssesorsComponent implements OnInit {
         phone: new FormControl(this.dataAssessor.phone, [Validators.required]),
         email: new FormControl(this.dataUser.email, [Validators.required]),
         level_education: new FormControl(this.dataAssessor.level_education, [Validators.required]),
-        afilation: new FormControl(this.dataAssessor.afilation)
+        specialty: new FormControl(this.dataAssessor.specialty, [Validators.required])
       });
       activeLabels();
       this.option = 'edit';

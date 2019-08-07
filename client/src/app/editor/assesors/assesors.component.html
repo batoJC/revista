@@ -68,7 +68,7 @@
                         <!-- muestra error cuando el valor en el campo es invalido -->
                         <div *ngIf="(country.touched || country.dirty) && country.invalid">
                             <span *ngIf="country.errors.required" class="helper-text error">Debe de ingresar su
-                                ciudad</span>
+                                Pais</span>
                         </div>
                         <!-- muestra un mensaje de dato correcto -->
                         <div *ngIf="(country.touched || country.dirty) && !country.invalid">
@@ -118,10 +118,10 @@
                     <div class="input-field col s12">
                         <select id="level_education" formControlName="level_education">
                             <option value="" selected></option>
-                            <option class="blue-text" value="pregrado">Pregrado</option>
-                            <option class="blue-text" value="especializacion">Especialización</option>
-                            <option class="blue-text" value="magister">Magister</option>
-                            <option class="blue-text" value="phd">PhD</option>
+                            <option class="blue-text" value="Pregrado">Pregrado</option>
+                            <option class="blue-text" value="Especializacion">Especialización</option>
+                            <option class="blue-text" value="Magister">Magister</option>
+                            <option class="blue-text" value="Phd">PhD</option>
                         </select>
                         <label for="level_education">Nivel de formación </label>
                         <!-- muestra error cuando el valor en el campo es invalido -->
@@ -136,6 +136,29 @@
                         </div>
                         <!-- muestra un texto de ayuda para el usuario -->
                         <div *ngIf=" !(level_education.touched || level_education.dirty) && level_education.invalid">
+                            <span class="helper-text"></span>
+                        </div>
+                    </div>
+                    <div class="input-field col s12">
+                        <select id="specialty" formControlName="specialty">
+                            <option value="" selected></option>
+                            <option class="blue-text" value="Videogames">Video-Games</option>
+                            <option class="blue-text" value="Ingenieria">Ingenieria</option>
+                            <option class="blue-text" value="Musica">Musica</option>
+                            <option class="blue-text" value="Biologia">Biologia</option>
+                            <option class="blue-text" value="Otros">Otros</option>
+                        </select>
+                        <label for="specialty"> Especialidad </label>
+                        <!-- muestra error cuando el valor en el campo es invalido -->
+                        <div *ngIf="(specialty.touched || specialty.dirty) && specialty.invalid">
+                            <span *ngIf="specialty.errors.required" class="helper-text error">Seleccione su Especialidad</span>
+                        </div>
+                        <!-- muestra un mensaje de dato correcto -->
+                        <div *ngIf="(specialty.touched || specialty.dirty) && !specialty.invalid">
+                            <span class="helper-text success"></span>
+                        </div>
+                        <!-- muestra un texto de ayuda para el usuario -->
+                        <div *ngIf=" !(specialty.touched || specialty.dirty) && specialty.invalid">
                             <span class="helper-text"></span>
                         </div>
                     </div>
@@ -168,6 +191,7 @@
                 <th>Ciudad</th>
                 <th>Teléfono</th>
                 <th>Nivel de educación</th>
+                <th>Especialización</th>
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -178,6 +202,7 @@
                 <td>{{ assessor.country }}</td>
                 <td>{{ assessor.phone }}</td>
                 <td>{{ assessor.level_education }}</td>
+                <td>{{ assessor.specialty }}</td>
                 <td>
                     <button style="margin-right: 8px;" (click)="loadData(assessor)" class="btn blue">
                         <i class="material-icons">edit</i>
