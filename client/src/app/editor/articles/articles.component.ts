@@ -5,11 +5,14 @@ import { ArticleService } from 'src/app/services/article.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { PublishingService } from 'src/app/services/publishing.service';
+import { AssessorService } from 'src/app/services/assessor.service';
+import { AssessorModel } from 'src/app/models/assessor.model';
 
-declare const openModal : any;
+declare const openModal: any;
 declare const closeModal: any;
 declare const activeLabels: any;
 declare const updateTextaeras: any;
+declare const iniciarSelect: any;
 
 
 
@@ -20,11 +23,11 @@ declare const updateTextaeras: any;
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor(private rutaActiva: ActivatedRoute, private articleService: ArticleService, private spinner: NgxSpinnerService, private publishingService: PublishingService) { }
+  constructor(private rutaActiva: ActivatedRoute, private articleService: ArticleService, private spinner: NgxSpinnerService, private publishingService: PublishingService, private assessorService: AssessorService) { }
 
   publishingId: string = '';
   nameEdition: string = '';
-  dataArticle:ArticleModel = {
+  dataArticle: ArticleModel = {
     title: '',
     abstract: '',
     key_words: '',
@@ -44,6 +47,7 @@ export class ArticlesComponent implements OnInit {
     this.publishingService.searchPublishing(this.publishingId).subscribe((item) => {
       this.nameEdition = item.name;
       activeLabels();
+      this.getListArticles('');
     });
   }
 
@@ -51,27 +55,84 @@ export class ArticlesComponent implements OnInit {
 
   getListArticles(state) {
     this.spinner.show();
-    console.log(this.publishingId);
-    this.articleService.loadPublishings(state, this.publishingId).subscribe((item) => {
-      this.listArticles = item;
-      this.spinner.hide();
-    }, () => {
-      this.getListArticles(state);
-    });
+    if (state == '') {
+      this.articleService.loadPublishingsById(this.publishingId).subscribe((item) => {
+        this.listArticles = item;
+        this.spinner.hide();
+      }, () => {
+        this.getListArticles(state);
+      });
+    } else {
+      this.articleService.loadPublishings(state, this.publishingId).subscribe((item) => {
+        this.listArticles = item;
+        this.spinner.hide();
+      }, () => {
+        this.getListArticles(state);
+      });
+    }
   }
 
   info(article) {
     this.dataArticle = article;
-    openModal('modalInfo','Datos del artículo');
-    setTimeout(()=>{
+    openModal('modalInfo', 'Datos del artículo');
+    setTimeout(() => {
       updateTextaeras();
-    },300);
+    }, 300);
   }
 
-  closeModal(){
+  closeModalInfo() {
     closeModal('modalInfo');
   }
 
+  closeModalAsignar() {
+    closeModal('modalAsignar');
+  }
+
+  
+
+  articleAux: ArticleModel={
+    title: '',
+    abstract: '',
+    key_words: '',
+    authors: [],
+    author_id: '',
+    publishing_id: '',
+    date: new Date(),
+    state: '',
+    file: '',
+    assessors: [],
+    comments: [],
+    id: '',
+  };
+  listAssessors: AssessorModel[];
+
+  openModalAsignar(article) {
+    this.articleAux = article;
+    this.assessorService.loadAssessorsAccepted().subscribe((item) => {
+      this.listAssessors = item;
+      openModal('modalAsignar', 'Seleccione los evaluadores de la lista');
+      setTimeout(() => {
+        iniciarSelect();
+      }, 500);
+    });
+  }
+
+  asignarAssessors(){
+    let count = this.articleAux.assessors.length;
+    if(count == 3){
+      this.articleAux.state = 'en evaluación';
+      this.articleService.update(this.articleAux).subscribe(()=>{
+        Swal.fire('Logrado!','Evaluadores asigandos correctamente.','success').then(()=>{
+          this.closeModalAsignar();
+        });
+      });
+    }else if(count < 3){
+      Swal.fire('Error!','Debe de seleccionar 3 evaluadores','error');
+    }else{
+      Swal.fire('Error!','Debe de seleccionar solo 3 evaluadores','error');
+    }
+    
+  }
 
 
 }

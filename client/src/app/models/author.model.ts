@@ -8,5 +8,6 @@ export interface AuthorModel {
     level_education: string;
     afilation: string;
     user_id: string;
+    state: string;
     id: string;
 }

@@ -123,6 +123,7 @@ export class RegisterComponent implements OnInit {
         level_education: this.registerData.get('level_education').value,
         afilation: this.registerData.get('afilation').value,
         user_id: '',
+        state: 'por confirmar',
         id: null
       };
 

@@ -37,6 +37,10 @@
       "type": "string",
       "required": true
     },
+    "state": {
+      "type": "string",
+      "required": true
+    },
     "user_id": {
       "type": "string",
       "required": true
