@@ -1,70 +1,76 @@
-<div id="commentsModal" class="modal">
-    <div class="modal-content">
-        <h4 class="center" id="modal-title"></h4>
-        <div class="row">
-            <div class="col right">
-                <button class="btn  blue" (click)="generarPDF()"><i class="material-icons">file_download</i></button>
-            </div>
-            <div class="col s12 m10 offset-m1" id="commentPDF">
-                <div class="comment" *ngFor="let comment of comments">
-                    <p>{{comment.date | date}}</p>
-                    <h5 class="blue-text">
-                        {{ comment.assessor.first_name + ' ' +  comment.assessor.second_name + ' ' + comment.assessor.first_last_name + ' ' + comment.assessor.second_last_name}}
-                    </h5>
-                    <h6>{{ comment.body }}</h6>
-                    <div class="stars" *ngFor="let loop of stars(5);let i= index">
-                        <span *ngIf="comment.stars >= (i + 1)" class="star blue-text">★</span>
-                        <span *ngIf="comment.stars < (i + 1)" class="star">★</span>
+<div class="container">
+    <div id="commentsModal" class="modal">
+        <div class="modal-content">
+            <h4 class="center" id="modal-title"></h4>
+            <div class="row">
+                <div class="col right">
+                    <button class="btn  blue" (click)="generarPDF()"><i
+                            class="material-icons">file_download</i></button>
+                </div>
+                <div class="col s12 m10 offset-m1" id="commentPDF">
+                    <div class="comment" *ngFor="let comment of comments">
+                        <p>{{comment.date | date}}</p>
+                        <h5 class="blue-text">
+                            {{ comment.assessor.first_name + ' ' +  comment.assessor.second_name + ' ' + comment.assessor.first_last_name + ' ' + comment.assessor.second_last_name}}
+                        </h5>
+                        <h6>{{ comment.body }}</h6>
+                        <div class="stars" *ngFor="let loop of stars(5);let i= index">
+                            <span *ngIf="comment.stars >= (i + 1)" class="star blue-text">★</span>
+                            <span *ngIf="comment.stars < (i + 1)" class="star">★</span>
+                        </div>
+                        <hr>
                     </div>
-                    <hr>
                 </div>
             </div>
+            <br>
         </div>
-        <br>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-red btn-flat">Cerrar</a>
+        </div>
     </div>
-    <div class="modal-footer">
-        <a class="modal-close waves-effect waves-red btn-flat">Cerrar</a>
+
+    <h3>Mi lista de artículos</h3>
+
+    <div class="row">
+        <table class="responsive-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th class="center">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let article of listArticles">
+                    <td>{{ article.id }}</td>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.date | date }}</td>
+                    <td>{{ article.state | uppercase }}</td>
+                    <td class="center">
+                        <!-- descargar archivo  -->
+                        <button style="margin-right: 8px;" class="btn blue">
+                            <i class="material-icons">cloud_download</i>
+                        </button>
+                        <!-- cargar archivo -->
+                        <button *ngIf="article.state == 'aceptado con cambios'" style="margin-right: 8px;"
+                            class="btn blue">
+                            <i class="material-icons">cloud_upload</i>
+                        </button>
+                        <!-- comentarios  *ngIf="article.state == 'enviada'" -->
+                        <button *ngIf="article.state != 'enviado'" (click)="commentsByArticle(article.id)"
+                            style="margin-right: 8px;" class="btn red">
+                            <i class="material-icons">comment</i>
+                        </button>
+                        <!-- editar -->
+                        <a *ngIf="article.state == 'enviado'" style="margin-right: 8px;"
+                            routerLink="../editArticle/{{ article.id }}" class="btn green">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-</div>
-
-<h3>Mi lista de artículos</h3>
-
-<div class="row">
-    <table class="responsive-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th class="center">Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let article of listArticles">
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.date | date }}</td>
-                <td>{{ article.state | uppercase }}</td>
-                <td class="center">
-                    <!-- descargar archivo  -->
-                    <button style="margin-right: 8px;" class="btn blue">
-                        <i class="material-icons">cloud_download</i>
-                    </button>
-                    <!-- cargar archivo -->
-                    <button *ngIf="article.state == 'aceptado con cambios'" style="margin-right: 8px;" class="btn blue">
-                        <i class="material-icons">cloud_upload</i>
-                    </button>
-                    <!-- comentarios  *ngIf="article.state == 'enviada'" -->
-                    <button *ngIf="article.state != 'enviado'" (click)="commentsByArticle(article.id)" style="margin-right: 8px;" class="btn red">
-                        <i class="material-icons">comment</i>
-                    </button>
-                    <!-- editar -->
-                    <a *ngIf="article.state == 'enviado'" style="margin-right: 8px;" routerLink="../editArticle/{{ article.id }}" class="btn green">
-                        <i class="material-icons">edit</i>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>

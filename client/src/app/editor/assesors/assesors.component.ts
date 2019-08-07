@@ -140,7 +140,8 @@ export class AssesorsComponent implements OnInit {
           specialty: this.assessorData.get('specialty').value,
           user_id: '',
           author_id: this.infoUser.id,
-          state: 'pendiente de respuesta',
+          // state: 'pendiente de respuesta',
+          state: 'evaluador',
           id: null
         };
 
