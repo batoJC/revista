@@ -31,6 +31,12 @@ export class ArticleService {
     return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}`);
   }
 
+  // list of articles to publishing
+  loadPublishingsById(publishing:string): Observable<ArticleModel[]> {
+    let filter = JSON.stringify({"where":{'publishing_id': publishing}});
+    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}`);
+  }
+
   // list of articles for author
   loadPublishing(author_id:string): Observable<ArticleModel[]> {
     let filter = JSON.stringify({"where":{'author_id': author_id }});

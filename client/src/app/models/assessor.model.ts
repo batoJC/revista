@@ -10,5 +10,6 @@ export interface AssessorModel {
     specialty: string;
     user_id: string;
     author_id: string;
+    state: string;
     id: string;
 }

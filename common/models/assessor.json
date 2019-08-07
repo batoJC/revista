@@ -41,6 +41,10 @@
       "type": "string",
       "required": true
     },
+    "state": {
+      "type": "string",
+      "required": true
+    },
     "author_id": {
       "type": "string",
       "required": true

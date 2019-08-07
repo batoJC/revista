@@ -26,6 +26,12 @@ export class AssessorService {
     return this.http.get<AssessorModel[]>(`${base_url}assessors`);
   }
 
+  // list of assessors with state evaluador
+  loadAssessorsAccepted(): Observable<AssessorModel[]> {
+    let filter = JSON.stringify({"where":{'state': 'evaluador' }});
+    return this.http.get<AssessorModel[]>(`${base_url}assessors?filter=${filter}`);
+  }
+
   //edit assessor
   updateAssessor(assessor: AssessorModel): Observable<AssessorModel> {
     return this.http.put<AssessorModel>(`${base_url}assessors/${assessor.id}`, assessor,

@@ -147,6 +147,7 @@ export class AssesorsComponent implements OnInit {
           user_id: '',
           specialty: 'cualquiera',
           author_id: this.infoUser.id,
+          state: 'pendiente de respuesta',
           id: null
         };
 
