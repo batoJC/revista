@@ -1,3 +1,5 @@
+import { UserModel } from './user.model';
+
 export interface AuthorModel {
     first_name: string;
     second_name: string;
@@ -9,5 +11,7 @@ export interface AuthorModel {
     afilation: string;
     user_id: string;
     state: string;
+    hash: string;
     id: string;
+    user: UserModel;
 }

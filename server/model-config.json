@@ -66,5 +66,13 @@
   "containers": {
     "dataSource": "files",
     "public": true
+  },
+  "Email": {
+    "dataSource": "Email",
+    "public": true
+  },
+  "Correos": {
+    "dataSource": "db",
+    "public": true
   }
 }

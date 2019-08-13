@@ -10,6 +10,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AssessorService } from 'src/app/services/assessor.service';
 import { AssessorModel } from 'src/app/models/assessor.model';
+import { UserService } from 'src/app/services/user.service';
+import { AuthorService } from 'src/app/services/author.service';
+import { EmailService } from 'src/app/services/email.service';
 
 declare const openModal: any;
 declare const closeModal: any;
@@ -25,7 +28,7 @@ declare const updateTextaeras: any;
 })
 export class ListArticlesComponent implements OnInit {
 
-  constructor(private articleService: ArticleService, private spinner: NgxSpinnerService, private authService: UserauthService, private commentService: CommentService, private assessorService: AssessorService) {
+  constructor(private articleService: ArticleService, private spinner: NgxSpinnerService, private authService: UserauthService, private commentService: CommentService, private assessorService: AssessorService,private userService: UserService,private autorService:AuthorService,private emailService:EmailService) {
     // this.commentService.countByArticle('5d450f6b3b147c265c3f1667').subscribe((item)=>{
     //   console.log(item.count);
     // });
@@ -78,6 +81,7 @@ export class ListArticlesComponent implements OnInit {
     this.articleService.loadArticleByAssessor(this.assessorData.id).subscribe((item) => {
       this.listArticles = item;
       this.spinner.hide();
+      console.log(item);
     }, () => {
       // this.getListArticles();
     });
@@ -118,6 +122,9 @@ export class ListArticlesComponent implements OnInit {
   }
 
   registrar() {
+    this.autorService.findById('5d44e64d3b147c265c3f1662').subscribe((item)=>{
+      console.log(item.user.email)
+    });
     if (this.commentData.valid) {
       let comment: CommentModel = {
         assessor_id: this.assessorData.id,
@@ -128,6 +135,7 @@ export class ListArticlesComponent implements OnInit {
         id: null,
         assessor: null
       }
+
 
       this.commentService.createNew(comment).subscribe((item) => {
         this.commentService.countByArticle(this.articleId).subscribe((item) => {
@@ -147,9 +155,14 @@ export class ListArticlesComponent implements OnInit {
                 item.state = 'aceptado';
               }
               this.articleService.update(item).subscribe(() => {
-                Swal.fire('Logrado!', 'Comentario agregado correctamenta', 'success').then(() => {
-                  this.getListArticles();
-                  this.closeModalEvaluar();
+                this.autorService.findById(item.author_id).subscribe((art)=>{
+                  this.emailService.sendEmail(`El artículo ${item.title} fue calificado y quedo en estado de ${item.state}`,'Resultado evaluación artículo',art.user.email).subscribe((email)=>{
+                    console.log(email);
+                    Swal.fire('Logrado!', 'Comentario agregado correctamenta', 'success').then(() => {
+                      this.getListArticles();
+                      this.closeModalEvaluar();
+                    });
+                  });
                 });
               });
             });

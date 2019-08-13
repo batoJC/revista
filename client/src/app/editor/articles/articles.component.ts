@@ -7,6 +7,9 @@ import Swal from 'sweetalert2';
 import { PublishingService } from 'src/app/services/publishing.service';
 import { AssessorService } from 'src/app/services/assessor.service';
 import { AssessorModel } from 'src/app/models/assessor.model';
+import { EmailService } from 'src/app/services/email.service';
+import { UserauthService } from 'src/app/services/userauth.service';
+import { UserService } from 'src/app/services/user.service';
 
 declare const openModal: any;
 declare const closeModal: any;
@@ -23,7 +26,7 @@ declare const iniciarSelect: any;
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor(private rutaActiva: ActivatedRoute, private articleService: ArticleService, private spinner: NgxSpinnerService, private publishingService: PublishingService, private assessorService: AssessorService) { }
+  constructor(private rutaActiva: ActivatedRoute, private articleService: ArticleService, private spinner: NgxSpinnerService, private publishingService: PublishingService, private assessorService: AssessorService, private emailService: EmailService, private authService: UserService) { }
 
   publishingId: string = '';
   nameEdition: string = '';
@@ -40,7 +43,7 @@ export class ArticlesComponent implements OnInit {
     assessors: [],
     comments: [],
     id: '',
-    author : null
+    author: null
   };
 
   ngOnInit() {
@@ -89,9 +92,9 @@ export class ArticlesComponent implements OnInit {
     closeModal('modalAsignar');
   }
 
-  
 
-  articleAux: ArticleModel={
+
+  articleAux: ArticleModel = {
     title: '',
     abstract: '',
     key_words: '',
@@ -104,7 +107,7 @@ export class ArticlesComponent implements OnInit {
     assessors: [],
     comments: [],
     id: '',
-    author : null
+    author: null
   };
   listAssessors: AssessorModel[];
 
@@ -119,21 +122,34 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
-  asignarAssessors(){
+  asignarAssessors() {
     let count = this.articleAux.assessors.length;
-    if(count == 3){
+    if (count == 3) {
       this.articleAux.state = 'en evaluación';
-      this.articleService.update(this.articleAux).subscribe(()=>{
-        Swal.fire('Logrado!','Evaluadores asigandos correctamente.','success').then(()=>{
+      this.articleService.update(this.articleAux).subscribe(() => {
+        let correos = '';
+        this.listAssessors.forEach(i => {
+          this.articleAux.assessors.forEach((j) => {
+            if ('id' + i.id == j) {
+              correos += i.user.email+',';
+            }
+
+          });
+        });
+        //enviar email a los assesores
+        this.emailService.sendEmail(`Se te ha asignado el siguiente artículo para que lo evalues.<br>título: ${this.articleAux.title}<br>Autor: ${this.articleAux.author.first_name}`, 'Asiganación de artículo', correos).subscribe((item) => {
+          console.log(item);
+          Swal.fire('Logrado!', 'Evaluadores asigandos correctamente.', 'success').then(() => {
+          });
           this.closeModalAsignar();
         });
       });
-    }else if(count < 3){
-      Swal.fire('Error!','Debe de seleccionar 3 evaluadores','error');
-    }else{
-      Swal.fire('Error!','Debe de seleccionar solo 3 evaluadores','error');
+    } else if (count < 3) {
+      Swal.fire('Error!', 'Debe de seleccionar 3 evaluadores', 'error');
+    } else {
+      Swal.fire('Error!', 'Debe de seleccionar solo 3 evaluadores', 'error');
     }
-    
+
   }
 
 

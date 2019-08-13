@@ -16,5 +16,21 @@
     "provider": "filesystem",
     "root": "server/storage",
     "nameConflict": "makeUnique"
+  },
+  "Email": {
+    "name": "Email",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "testresvista@gmail.com",
+          "pass": "Test-12345"
+        }
+      }
+    ]
   }
 }

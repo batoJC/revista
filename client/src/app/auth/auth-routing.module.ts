@@ -38,7 +38,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'confirm',
+    path: 'confirm/:hash',
     component: ConfirmComponent,
     canActivate :[
       NotLoginGuard

@@ -27,4 +27,34 @@ export class AuthorService {
     return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}`);
   }
 
+  findByUserHash(hash): Observable<AuthorModel>{
+    let filter = JSON.stringify({"where":{'hash': hash }});
+    return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}`,
+    {
+      headers: new HttpHeaders({
+        "content-type": "application/json"
+      })
+    });
+  }
+
+  findById(id): Observable<AuthorModel>{
+    let filter = JSON.stringify({"where":{'_id': id },'include':'user'});
+    return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}`,
+    {
+      headers: new HttpHeaders({
+        "content-type": "application/json"
+      })
+    });
+  }
+
+  //edit autor
+  updateEditor(author: AuthorModel): Observable<AuthorModel> {
+    return this.http.put<AuthorModel>(`${base_url}authors/${author.id}`, author,
+      {
+        headers: new HttpHeaders({
+          "content-type": "application/json"
+        })
+      });
+  }
+
 }

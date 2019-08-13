@@ -1,3 +1,5 @@
+import { UserModel } from './user.model';
+
 export interface AssessorModel {
     first_name: string;
     second_name: string;
@@ -11,4 +13,5 @@ export interface AssessorModel {
     author_id: string;
     state: string;
     id: string;
+    user: UserModel;
 }

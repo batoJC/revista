@@ -28,7 +28,7 @@ export class AssessorService {
 
   // list of assessors with state evaluador
   loadAssessorsAccepted(): Observable<AssessorModel[]> {
-    let filter = JSON.stringify({"where":{'state': 'evaluador' }});
+    let filter = JSON.stringify({"where":{'state': 'evaluador'},"include":'user'});
     return this.http.get<AssessorModel[]>(`${base_url}assessors?filter=${filter}`);
   }
 

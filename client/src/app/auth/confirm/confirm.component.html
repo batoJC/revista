@@ -1,9 +1,12 @@
-<h4 class="center">
-    Bienvenido al sistema de Nuestra revista esperamos que pueda sentirse muy agusto con nuestro sistema
-</h4>
 
-<div class="row">
-    <div class="col offset-m4 s12 m3">
-        <button class="btn blue">Confirmar mi correo</button>
+<div class="container">
+    <h4 class="center">
+        {{message}}
+    </h4>
+    
+    <div *ngIf="action" class="row">
+        <div class="col offset-m4 s12 m3 center">
+            <button (click)="Confirmar()" class="btn blue">Confirmar mi correo</button>
+        </div>
     </div>
 </div>

@@ -142,7 +142,8 @@ export class AssesorsComponent implements OnInit {
           author_id: this.infoUser.id,
           // state: 'pendiente de respuesta',
           state: 'evaluador',
-          id: null
+          id: null,
+          user: null
         };
 
         this.userService.createNew(dataUser).subscribe(item => {

@@ -7,6 +7,8 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { EmailService } from 'src/app/services/email.service';
+import * as CryptoJS from 'crypto-js';
 
 
 declare const iniciarSelect: any;
@@ -18,7 +20,7 @@ declare const iniciarSelect: any;
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authorService: AuthorService, private userService: UserService, private router: Router, private spinner: NgxSpinnerService) {
+  constructor(private authorService: AuthorService, private userService: UserService, private router: Router, private spinner: NgxSpinnerService, private emailService: EmailService) {
     this.registerData = this.formGroupCreator();
     this.spinner.show();
     setTimeout(() => {
@@ -93,6 +95,12 @@ export class RegisterComponent implements OnInit {
 
 
   register(): void {
+
+    // let hash = CryptoJS.AES.encrypt( this.registerData.get('password').value + (Math.random() * (4000000 - 0) + 0), 'jkasbdjabsjbdkjsad').toString().replace('///g','#').replace('/+/g','#');
+    // console.log(hash);
+    // return;
+
+
     if (this.registerData.valid) {
       //verificar token
       if (this.token == '') {
@@ -113,6 +121,10 @@ export class RegisterComponent implements OnInit {
         user: null
       };
 
+      //generar hash
+     
+      let hash = CryptoJS.SHA256( this.registerData.get('password').value + (Math.random() * (4000000 - 0) + 0), '12hjb2j1hb21hj3hj213').toString();
+
       let dataAuthor: AuthorModel = {
         first_name: this.registerData.get('first_name').value,
         second_name: this.registerData.get('second_name').value,
@@ -124,26 +136,31 @@ export class RegisterComponent implements OnInit {
         afilation: this.registerData.get('afilation').value,
         user_id: '',
         state: 'por confirmar',
-        id: null
+        hash: hash,
+        id: null,
+        user: null
       };
 
       this.userService.createNew(dataUser).subscribe(item => {
         dataAuthor.user_id = item.id;
         this.authorService.createNew(dataAuthor).subscribe(item => {
-          this.spinner.hide();
-          Swal.fire('Logrado!',
-            'Se ha registrado Correctamente, por favor confirme su correo electronico para iniciar sesión',
-            'success').then(() => {
-              this.router.navigate(['/']);
-            });
+          //enviar email para que verifique el correo
+          this.emailService.sendEmail(`Bienvenido al Sistema de nuestra revista<br>Para confirmar su correo electronico haga click en el siguiente enlace <a href="http://localhost:4200/confirm/${hash}" >Confirmar Dirrección de correo electrónico</a>`, 'Confirmar mi correo', dataUser.email).subscribe((item) => {
+            this.spinner.hide();
+            Swal.fire('Logrado!',
+              'Se ha registrado Correctamente, por favor confirme su correo electronico para iniciar sesión',
+              'success').then(() => {
+                this.router.navigate(['/']);
+              });
+          });
         }, (err) => {
           this.spinner.hide();
           Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
         });
-      },(erro)=>{
+      }, (erro) => {
         this.spinner.hide();
         console.log(erro);
-          Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
+        Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
       });
     } else {
       Swal.fire('Error!', 'Debe de completar todos los datos correctamente', 'error');

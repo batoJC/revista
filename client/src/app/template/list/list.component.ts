@@ -18,7 +18,7 @@ export class ListComponent implements OnInit {
     this.spinner.show();
     this.publishingService.getActive().subscribe((item) => {
       console.log(item);
-      this.articlesService.loadPublishingsById(item.id).subscribe((item) => {
+      this.articlesService.lista(item.id).subscribe((item) => {
         let i = 0;
         let aux = new Array();
         item.forEach((article) => {
