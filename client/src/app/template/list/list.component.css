@@ -17,7 +17,7 @@
 }
 
 .banner img {
-    width: 80%;
+    width: 60%;
     height: auto;
 }
 
@@ -64,11 +64,11 @@
 
 .file i{
     transform: scale(1);
-    transition: 0.5s;
+    transition: .1s ease-in-out;
 }
 
 .file i:hover{
     transform: scale(1.5);
-    transition: 0.5s;
+    transition: .1s ease-in-out;
     color: #2196f3;
 }

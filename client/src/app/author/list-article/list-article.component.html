@@ -50,14 +50,15 @@
                     <td>{{ article.state | uppercase }}</td>
                     <td class="center">
                         <!-- descargar archivo  -->
-                        <button style="margin-right: 8px;" class="btn blue">
+                        <a target="_blanck" href="http://localhost:3000/api/containers/pdf/download/{{ article.file }}" style="margin-right: 8px;" class="btn blue" download>
                             <i class="material-icons">cloud_download</i>
-                        </button>
+                        </a>
                         <!-- cargar archivo -->
-                        <button *ngIf="article.state == 'aceptado con cambios'" style="margin-right: 8px;"
+                        <input style="display: none" (change)="changeFile(article)" id="file{{ article.id }}" type="file">
+                        <label *ngIf="article.state == 'aceptado con cambios'" for="file{{ article.id }}"  style="margin-right: 8px;"
                             class="btn blue">
                             <i class="material-icons">cloud_upload</i>
-                        </button>
+                        </label>
                         <!-- comentarios  *ngIf="article.state == 'enviada'" -->
                         <button *ngIf="article.state != 'enviado'" (click)="commentsByArticle(article.id)"
                             style="margin-right: 8px;" class="btn red">

@@ -6,10 +6,14 @@ import { UserauthService } from 'src/app/services/userauth.service';
 import { UserModel } from 'src/app/models/user.model';
 import { CommentModel } from 'src/app/models/comment.model';
 import * as jsPDF from 'jspdf';
+import { FilesService } from 'src/app/services/files.service';
+import Swal from 'sweetalert2';
 
 
 declare const openModal: any;
 declare const closeModal: any;
+declare const getPdfById: any;
+
 
 @Component({
   selector: 'app-list-article',
@@ -18,7 +22,7 @@ declare const closeModal: any;
 })
 export class ListArticleComponent implements OnInit {
 
-  constructor(private articleService: ArticleService, private spinner: NgxSpinnerService, private authService: UserauthService) { }
+  constructor(private articleService: ArticleService, private spinner: NgxSpinnerService, private authService: UserauthService, private fileService: FilesService) { }
 
   usuario: UserModel = null;
 
@@ -51,7 +55,7 @@ export class ListArticleComponent implements OnInit {
   }
 
   generarPDF() {
-    var doc = new jsPDF("p","pt","a4");
+    var doc = new jsPDF("p", "pt", "a4");
     let contador = 40;
     this.comments.forEach(element => {
       let fecha = new Date(element.date).toString();
@@ -60,24 +64,45 @@ export class ListArticleComponent implements OnInit {
       doc.setFontSize(12);
       body = doc.splitTextToSize(element.body, 480);
       doc.setFontSize(10);
-      doc.setTextColor(0,0,255);
-      doc.text(30, contador,fecha);
-      doc.setTextColor(0,0,0);
+      doc.setTextColor(0, 0, 255);
+      doc.text(30, contador, fecha);
+      doc.setTextColor(0, 0, 0);
       contador += 20;
       doc.setFontSize(20);
-      doc.text(50, contador,nombre);
+      doc.text(50, contador, nombre);
       contador += 15;
       doc.setFontSize(12);
-      doc.text(50, contador,body);
+      doc.text(50, contador, body);
       contador += (body.length * 10) + 15;
       doc.setFontSize(8);
-      doc.setTextColor(0,0,255);
-      doc.text(50,contador,`${element.stars} Estrellas`);
+      doc.setTextColor(0, 0, 255);
+      doc.text(50, contador, `${element.stars} Estrellas`);
       contador += 20
     });
     // doc.output('datauri');
 
     doc.save('comments.pdf');
+  }
+
+  changeFile(article) {
+    this.spinner.show();
+    this.fileService.delete(article.file).subscribe((item) => {
+      let pdf = getPdfById('file'+article.id);
+      let archivo = new FormData();
+      archivo.append('files', pdf);
+
+      this.fileService.createNew(archivo).subscribe((item) => {
+        let namearchivo = item.result.files.files[0].name;
+        article.file = namearchivo;
+        article.state = 'aceptado';
+        this.articleService.update(article).subscribe(() => {
+          Swal.fire('Logrado!','Archivo cargado Correctamente.','success').then(()=>{
+            this.getListArticles();
+          });
+          this.spinner.hide();
+        });
+      });
+    });
   }
 
 }

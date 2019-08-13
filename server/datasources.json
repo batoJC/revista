@@ -9,5 +9,12 @@
     "user": "db",
     "useNewUrlParser": true,
     "connector": "mongodb"
+  },
+  "files": {
+    "name": "files",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "server/storage",
+    "nameConflict": "makeUnique"
   }
 }

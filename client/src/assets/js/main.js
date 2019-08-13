@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-function iniciarDatapicker(){
+function iniciarDatapicker() {
     M.Datepicker.init(document.querySelectorAll('.datepicker'), {
-        format:'yyyy-mm-dd'
+        format: 'yyyy-mm-dd'
     });
 }
 
-function getDato(id){
-    return document.querySelector('#'+id).value;
+function getDato(id) {
+    return document.querySelector('#' + id).value;
 }
 
 function iniciarSelect() {
@@ -27,7 +27,7 @@ function closeModal(id) {
     instance.close();
 }
 
-function updateTextaeras(){
+function updateTextaeras() {
     M.textareaAutoResize(document.querySelector('textarea'));
 }
 
@@ -63,4 +63,10 @@ function disableLabels() {
     labels.forEach(element => {
         element.className = '';
     });
+}
+
+
+function getPdfById(id) {
+    let pdf = document.getElementById(id);
+    return pdf.files[0];
 }

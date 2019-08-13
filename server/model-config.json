@@ -62,5 +62,9 @@
   "assessor": {
     "dataSource": "db",
     "public": true
+  },
+  "containers": {
+    "dataSource": "files",
+    "public": true
   }
 }

@@ -71,6 +71,21 @@
                             artículo</span>
                     </div>
                 </div>
+
+                <div  *ngIf="texto != ''" class="file-field input-field col s12">
+                    <div class="card-panel">
+                        <span class="red-text text-darken-2">{{ texto }}</span>
+                    </div>
+                </div>
+                <div class="file-field input-field col s12">
+                    <div class="btn blue">
+                        <span>Archivo</span>
+                        <input type="file" accept="application/pdf" id="file">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
                 <br>
                 <table>
                     <thead>

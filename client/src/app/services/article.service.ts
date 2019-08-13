@@ -33,7 +33,7 @@ export class ArticleService {
 
   // list of articles to publishing
   loadPublishingsById(publishing:string): Observable<ArticleModel[]> {
-    let filter = JSON.stringify({"where":{'publishing_id': publishing}});
+    let filter = JSON.stringify({"where":{'publishing_id': publishing},"include":"author"});
     return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}`);
   }
 
@@ -43,7 +43,7 @@ export class ArticleService {
     return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}`);
   }
 
-  //find information the artocle with id
+  //find information the article with id
   searchById(id:string):Observable<ArticleModel>{
     return this.http.get<ArticleModel>(`${base_url}articles/${id}?filter[include]=comments`);
   }

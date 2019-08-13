@@ -22,4 +22,9 @@ export class AuthorService {
       });
   }
 
+  findByUserId(id): Observable<AuthorModel>{
+    let filter = JSON.stringify({"where":{'user_id': id }});
+    return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}`);
+  }
+
 }

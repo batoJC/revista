@@ -140,6 +140,10 @@ export class RegisterComponent implements OnInit {
           this.spinner.hide();
           Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
         });
+      },(erro)=>{
+        this.spinner.hide();
+        console.log(erro);
+          Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
       });
     } else {
       Swal.fire('Error!', 'Debe de completar todos los datos correctamente', 'error');

@@ -40,6 +40,7 @@ export class ArticlesComponent implements OnInit {
     assessors: [],
     comments: [],
     id: '',
+    author : null
   };
 
   ngOnInit() {
@@ -103,6 +104,7 @@ export class ArticlesComponent implements OnInit {
     assessors: [],
     comments: [],
     id: '',
+    author : null
   };
   listAssessors: AssessorModel[];
 

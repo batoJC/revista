@@ -1,4 +1,5 @@
 import { CommentModel } from './comment.model';
+import { AuthorModel } from './author.model';
 
 export interface ArticleModel {
     title: string;
@@ -13,4 +14,5 @@ export interface ArticleModel {
     assessors: string[];
     comments: CommentModel[];
     id: string;
+    author: AuthorModel;
 }

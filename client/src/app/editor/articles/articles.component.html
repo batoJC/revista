@@ -80,15 +80,16 @@
                     <th class="center">Opciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>               
                 <tr *ngFor="let article of listArticles">
                     <td>{{ article.id }}</td>
                     <td>{{ article.title }}</td>
                     <td>{{ article.state | uppercase }}</td>
                     <td class="center">
-                        <button style="margin-right: 8px;" class="btn blue">
+                         <!-- descargar archivo  -->
+                         <a target="_blanck" href="http://localhost:3000/api/containers/pdf/download/{{ article.file }}" style="margin-right: 8px;" class="btn blue" download>
                             <i class="material-icons">cloud_download</i>
-                        </button>
+                        </a>
                         <a style="margin-right: 8px;" (click)="info(article)" class="btn green">
                             <i class="material-icons">remove_red_eye</i>
                         </a>
