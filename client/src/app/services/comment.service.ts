@@ -20,7 +20,7 @@ export class CommentService {
   }
 
   createNew(comment: CommentModel): Observable<CommentModel> {
-    return this.http.post<CommentModel>(`${base_url}comments?accessToken=${this.token}`, comment,
+    return this.http.post<CommentModel>(`${base_url}comments?access_token=${this.token}`, comment,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -30,7 +30,7 @@ export class CommentService {
 
   countByArticle(id: string): Observable<any> {
     let filter = JSON.stringify({ 'article_id': id });
-    return this.http.get<any>(`${base_url}comments/count?where=${filter}&accessToken=${this.token}`, {
+    return this.http.get<any>(`${base_url}comments/count?where=${filter}&access_token=${this.token}`, {
       headers: new HttpHeaders({
         "content-type": "application/json"
       })

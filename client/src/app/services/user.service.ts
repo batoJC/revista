@@ -18,7 +18,7 @@ export class UserService {
   }
 
   createNew(user: UserModel):Observable<UserModel>{
-    return this.http.post<UserModel>(`${base_url}Users?accessToken=${this.token}`,user,
+    return this.http.post<UserModel>(`${base_url}Users?access_token=${this.token}`,user,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -37,13 +37,13 @@ export class UserService {
 
    //delete user
    deleteUser(userId: String): Observable<UserModel> {
-    return this.http.delete<UserModel>(`${base_url}Users/${userId}?accessToken=${this.token}`);
+    return this.http.delete<UserModel>(`${base_url}Users/${userId}?access_token=${this.token}`);
   };
 
   //find by email
   findByEmail(email:string):Observable<UserModel>{
     let filter = JSON.stringify({"where":{'email': email }});
-    return this.http.get<UserModel>(`${base_url}Users/findOne/?filter=${filter}&accessToken=${this.token}`,{
+    return this.http.get<UserModel>(`${base_url}Users/findOne/?filter=${filter}&access_token=${this.token}`,{
       headers: new HttpHeaders({
         "content-type": "application/json"
       })
@@ -53,7 +53,7 @@ export class UserService {
   //find by rol
   findByRol(rol:number):Observable<UserModel[]>{
     let filter = JSON.stringify({"where":{'rol': rol }});
-    return this.http.get<UserModel[]>(`${base_url}Users?filter=${filter}&accessToken=${this.token}`,{
+    return this.http.get<UserModel[]>(`${base_url}Users?filter=${filter}&access_token=${this.token}`,{
       headers: new HttpHeaders({
         "content-type": "application/json"
       })

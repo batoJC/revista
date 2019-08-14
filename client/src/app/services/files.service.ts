@@ -16,11 +16,11 @@ export class FilesService {
   }
 
   createNew(file): Observable<any> {
-    return this.http.post<any>(`${base_url}containers/pdf/upload?accessToken=${this.token}`, file);
+    return this.http.post<any>(`${base_url}containers/pdf/upload?access_token=${this.token}`, file);
   }
 
   delete(file): Observable<any>{
-    return this.http.delete<any>(`${base_url}containers/pdf/files/${file}?accessToken=${this.token}`);
+    return this.http.delete<any>(`${base_url}containers/pdf/files/${file}?access_token=${this.token}`);
   }
 
 

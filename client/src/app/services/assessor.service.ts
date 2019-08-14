@@ -19,7 +19,7 @@ export class AssessorService {
 
 
   createNew(author: AssessorModel): Observable<AssessorModel> {
-    return this.http.post<AssessorModel>(`${base_url}assessors?accessToken=${this.token}`, author,
+    return this.http.post<AssessorModel>(`${base_url}assessors?access_token=${this.token}`, author,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -29,18 +29,18 @@ export class AssessorService {
 
   // list of assessors
   loadAssessors(): Observable<AssessorModel[]> {
-    return this.http.get<AssessorModel[]>(`${base_url}assessors?accessToken=${this.token}`);
+    return this.http.get<AssessorModel[]>(`${base_url}assessors?access_token=${this.token}`);
   }
 
   // list of assessors with state evaluador
   loadAssessorsAccepted(): Observable<AssessorModel[]> {
     let filter = JSON.stringify({ "where": { 'state': 'evaluador' }, "include": 'user' });
-    return this.http.get<AssessorModel[]>(`${base_url}assessors?filter=${filter}&accessToken=${this.token}`);
+    return this.http.get<AssessorModel[]>(`${base_url}assessors?filter=${filter}&access_token=${this.token}`);
   }
 
   //edit assessor
   updateAssessor(assessor: AssessorModel): Observable<AssessorModel> {
-    return this.http.put<AssessorModel>(`${base_url}assessors/${assessor.id}?accessToken=${this.token}`, assessor,
+    return this.http.put<AssessorModel>(`${base_url}assessors/${assessor.id}?access_token=${this.token}`, assessor,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -50,17 +50,17 @@ export class AssessorService {
 
   //delete assessor
   deleteAssessor(assessorId: String): Observable<AssessorModel> {
-    return this.http.delete<AssessorModel>(`${base_url}assessors/${assessorId}?accessToken=${this.token}`);
+    return this.http.delete<AssessorModel>(`${base_url}assessors/${assessorId}?access_token=${this.token}`);
   };
 
   findByIdUser(id: string): Observable<AssessorModel[]> {
     let filter = JSON.stringify({ "where": { 'user_id': id } });
-    return this.http.get<AssessorModel[]>(`${base_url}assessors?filter=${filter}&accessToken=${this.token}`);
+    return this.http.get<AssessorModel[]>(`${base_url}assessors?filter=${filter}&access_token=${this.token}`);
   }
 
   findByUserHash(hash): Observable<AssessorModel> {
     let filter = JSON.stringify({ "where": { 'hash': hash } });
-    return this.http.get<AssessorModel>(`${base_url}assessors?filter=${filter}&accessToken=${this.token}`,
+    return this.http.get<AssessorModel>(`${base_url}assessors?filter=${filter}&access_token=${this.token}`,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"

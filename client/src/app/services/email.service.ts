@@ -17,7 +17,7 @@ export class EmailService {
 
   //send email
   sendEmail(message,subject,emailAddresses):Observable<any>{
-    return this.http.post<any>(`${base_url}correos/sendEmail?accessToken=${this.token}`,{message,subject,emailAddresses});
+    return this.http.post<any>(`${base_url}correos/sendEmail?access_token=${this.token}`,{message,subject,emailAddresses});
   }
 
 }

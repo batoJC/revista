@@ -18,7 +18,7 @@ export class AuthorService {
   }
 
   createNew(author: AuthorModel): Observable<AuthorModel> {
-    return this.http.post<AuthorModel>(`${base_url}authors?accessToken=${this.token}`, author,
+    return this.http.post<AuthorModel>(`${base_url}authors?access_token=${this.token}`, author,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -28,12 +28,12 @@ export class AuthorService {
 
   findByUserId(id): Observable<AuthorModel> {
     let filter = JSON.stringify({ "where": { 'user_id': id } });
-    return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}&accessToken=${this.token}`);
+    return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}&access_token=${this.token}`);
   }
 
   findByUserHash(hash): Observable<AuthorModel> {
     let filter = JSON.stringify({ "where": { 'hash': hash } });
-    return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}&accessToken=${this.token}`,
+    return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}&access_token=${this.token}`,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -43,7 +43,7 @@ export class AuthorService {
 
   findById(id): Observable<AuthorModel> {
     let filter = JSON.stringify({ "where": { '_id': id }, 'include': 'user' });
-    return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}&accessToken=${this.token}`,
+    return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}&access_token=${this.token}`,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -53,7 +53,7 @@ export class AuthorService {
 
   //edit autor
   updateEditor(author: AuthorModel): Observable<AuthorModel> {
-    return this.http.put<AuthorModel>(`${base_url}authors/${author.id}?accessToken=${this.token}`, author,
+    return this.http.put<AuthorModel>(`${base_url}authors/${author.id}?access_token=${this.token}`, author,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"

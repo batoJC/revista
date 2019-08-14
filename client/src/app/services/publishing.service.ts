@@ -19,7 +19,7 @@ export class PublishingService {
 
 
   createNew(publishing: PublishingModel): Observable<PublishingModel> {
-    return this.http.post<PublishingModel>(`${base_url}publishings?accessToken=${this.token}`, publishing,
+    return this.http.post<PublishingModel>(`${base_url}publishings?access_token=${this.token}`, publishing,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -29,12 +29,12 @@ export class PublishingService {
 
   // list of publishings
   loadPublishings(): Observable<PublishingModel[]> {
-    return this.http.get<PublishingModel[]>(`${base_url}publishings?accessToken=${this.token}`);
+    return this.http.get<PublishingModel[]>(`${base_url}publishings?access_token=${this.token}`);
   }
 
   //edit publishing
   updatePublishing(publishing: PublishingModel): Observable<PublishingModel> {
-    return this.http.put<PublishingModel>(`${base_url}publishings/${publishing.id}?accessToken=${this.token}`, publishing,
+    return this.http.put<PublishingModel>(`${base_url}publishings/${publishing.id}?access_token=${this.token}`, publishing,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -44,24 +44,24 @@ export class PublishingService {
 
   //delete publishing
   deletePublishing(publishingId: String): Observable<PublishingModel> {
-    return this.http.delete<PublishingModel>(`${base_url}publishings/${publishingId}?accessToken=${this.token}`);
+    return this.http.delete<PublishingModel>(`${base_url}publishings/${publishingId}?access_token=${this.token}`);
   };
 
   //search publishing
   searchPublishing(id:string): Observable<PublishingModel>{
-    return this.http.get<PublishingModel>(`${base_url}publishings/${id}?accessToken=${this.token}`)
+    return this.http.get<PublishingModel>(`${base_url}publishings/${id}?access_token=${this.token}`)
     
   }
 
   //search a publishing active
   getActive():Observable<PublishingModel>{
     let filter = JSON.stringify({"where":{'state': true }});
-    return this.http.get<PublishingModel>(`${base_url}publishings/findOne?filter=${filter}&accessToken=${this.token}`);
+    return this.http.get<PublishingModel>(`${base_url}publishings/findOne?filter=${filter}&access_token=${this.token}`);
   }
 
   //poner todas las ediciones en false
   setState():Observable<any>{
-    return this.http.post<any>(`${base_url}publishings/update?where={}&accessToken=${this.token}`,{"state":false});
+    return this.http.post<any>(`${base_url}publishings/update?where={}&access_token=${this.token}`,{"state":false});
   }
 
 

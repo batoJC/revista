@@ -19,7 +19,7 @@ export class EditorService {
   }
 
   createNew(author: EditorModel): Observable<EditorModel> {
-    return this.http.post<EditorModel>(`${base_url}editors?accessToken=${this.token}`, author,
+    return this.http.post<EditorModel>(`${base_url}editors?access_token=${this.token}`, author,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -29,12 +29,12 @@ export class EditorService {
 
   // list of editors
   loadEditors(): Observable<EditorModel[]> {
-    return this.http.get<EditorModel[]>(`${base_url}editors?accessToken=${this.token}`);
+    return this.http.get<EditorModel[]>(`${base_url}editors?access_token=${this.token}`);
   }
 
   //edit editor
   updateEditor(editor: EditorModel): Observable<EditorModel> {
-    return this.http.put<EditorModel>(`${base_url}editors/${editor.id}?accessToken=${this.token}`, editor,
+    return this.http.put<EditorModel>(`${base_url}editors/${editor.id}?access_token=${this.token}`, editor,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -44,12 +44,12 @@ export class EditorService {
 
   //delete editor
   deleteEditor(editorId: String): Observable<EditorModel> {
-    return this.http.delete<EditorModel>(`${base_url}editors/${editorId}?accessToken=${this.token}`);
+    return this.http.delete<EditorModel>(`${base_url}editors/${editorId}?access_token=${this.token}`);
   };
 
   findEditorById(id:string): Observable<EditorModel>{
     let filter = JSON.stringify({"where":{},"include":"user"});
-    return this.http.delete<EditorModel>(`${base_url}editors/${id}?filter=${filter}&accessToken=${this.token}`);
+    return this.http.delete<EditorModel>(`${base_url}editors/${id}?filter=${filter}&access_token=${this.token}`);
   }
 
 
