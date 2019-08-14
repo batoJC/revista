@@ -1,4 +1,5 @@
 import { UserModel } from './user.model';
+import { AuthorModel } from './author.model';
 
 export interface AssessorModel {
     first_name: string;
@@ -10,8 +11,9 @@ export interface AssessorModel {
     level_education: string;
     specialty: string;
     user_id: string;
-    author_id: string;
+    editor_id: string;
     state: string;
+    hash: string;
     id: string;
     user: UserModel;
 }

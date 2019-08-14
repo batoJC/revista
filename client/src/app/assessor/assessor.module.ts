@@ -4,9 +4,10 @@ import { ReactiveFormsModule} from '@angular/forms';
 
 import { AssessorRoutingModule } from './assessor-routing.module';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
+import { AcceptComponent } from './accept/accept.component';
 
 @NgModule({
-  declarations: [ListArticlesComponent],
+  declarations: [ListArticlesComponent, AcceptComponent],
   imports: [
     CommonModule,
     AssessorRoutingModule,

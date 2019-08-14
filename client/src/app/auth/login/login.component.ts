@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthorService } from 'src/app/services/author.service';
+import { AssessorService } from 'src/app/services/assessor.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { AuthorService } from 'src/app/services/author.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private serviceAuth: UserauthService, private route: Router, private spinner: NgxSpinnerService, private authorService: AuthorService) {
+  constructor(private serviceAuth: UserauthService, private route: Router, private spinner: NgxSpinnerService, private authorService: AuthorService,private assessorService: AssessorService) {
     this.loginData = this.formGroupCreator();
     this.spinner.show();
     setTimeout(() => {
@@ -82,10 +83,21 @@ export class LoginComponent implements OnInit {
             this.spinner.hide();
             break;
           case 3:
-            this.serviceAuth.saveToken(auth.id);
-            this.serviceAuth.saveUserInformation(auth.user);
-            this.route.navigate(['/']);
-            this.spinner.hide();
+            this.assessorService.findByIdUser(auth.user.id).subscribe((item)=>{
+              console.log(item);
+              if (item[0].state == 'evaluador') {
+                this.serviceAuth.saveToken(auth.id);
+                this.serviceAuth.saveUserInformation(auth.user);
+                this.route.navigate(['/']);
+                this.spinner.hide();
+              } else if(item[0].state == 'cancelado'){
+                this.spinner.hide();
+                Swal.fire('Error!', 'Usted rechazo la participación en la revista', 'error');
+              }else{
+                this.spinner.hide();
+                Swal.fire('Error!', 'Primero debe de confirmar su participación en la revista', 'error');
+              }
+            });
             break;
         }
 

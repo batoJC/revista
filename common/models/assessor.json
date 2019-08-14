@@ -45,7 +45,11 @@
       "type": "string",
       "required": true
     },
-    "author_id": {
+    "hash": {
+      "type": "string",
+      "required": true
+    },
+    "editor_id": {
       "type": "string",
       "required": true
     }
@@ -57,10 +61,10 @@
       "model": "User",
       "foreignKey": "user_id"
     },
-    "author": {
+    "editor": {
       "type": "belongsTo",
       "model": "User",
-      "foreignKey": "author_id"
+      "foreignKey": "editor_id"
     }
   },
   "acls": [],

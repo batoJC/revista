@@ -1,0 +1,13 @@
+
+<div class="container">
+    <h4 class="center">
+        {{message}}
+    </h4>
+    
+    <div *ngIf="action" class="row">
+        <div class="col offset-m3 s12 m6 center">
+            <button (click)="Confirmar('evaluador')" class="btn blue" style="margin-right: 10px;">Aceptar Invitación</button>
+            <button (click)="Confirmar('cancelado')" class="btn blue">rechazar Invitación</button>
+        </div>
+    </div>
+</div>

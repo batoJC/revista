@@ -52,4 +52,14 @@ export class AssessorService {
     return this.http.get<AssessorModel[]>(`${base_url}assessors?filter=${filter}`);
   }
 
+  findByUserHash(hash): Observable<AssessorModel>{
+    let filter = JSON.stringify({"where":{'hash': hash }});
+    return this.http.get<AssessorModel>(`${base_url}assessors?filter=${filter}`,
+    {
+      headers: new HttpHeaders({
+        "content-type": "application/json"
+      })
+    });
+  }
+
 }

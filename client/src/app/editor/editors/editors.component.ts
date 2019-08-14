@@ -135,7 +135,8 @@ export class EditorsComponent implements OnInit {
           phone: this.editorData.get('phone').value,
           level_education: this.editorData.get('level_education').value,
           user_id: '',
-          id: null
+          id: null,
+          user: null
         };
 
         this.userService.createNew(dataUser).subscribe(item => {

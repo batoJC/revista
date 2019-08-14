@@ -7,6 +7,11 @@ import { AssessorService } from 'src/app/services/assessor.service';
 import { AssessorModel } from 'src/app/models/assessor.model';
 import { UserModel } from 'src/app/models/user.model';
 import Swal from 'sweetalert2';
+import * as CryptoJS from 'crypto-js';
+import { EmailService } from 'src/app/services/email.service';
+import { EditorService } from 'src/app/services/editor.service';
+import { EditorModel } from 'src/app/models/editor.model';
+
 
 declare const iniciarSelect: any;
 declare const openModal: any;
@@ -25,7 +30,7 @@ export class AssesorsComponent implements OnInit {
   infoUser: UserModel;
   assessorData: FormGroup;
 
-  constructor(private assessorService: AssessorService, private userService: UserService, private spinner: NgxSpinnerService, private authService: UserauthService) {
+  constructor(private assessorService: AssessorService, private userService: UserService, private spinner: NgxSpinnerService, private authService: UserauthService, private emailService: EmailService,private editorService:EditorService) {
     this.token = authService.getToken();
     this.infoUser = this.authService.getUserInformation();
     this.assessorData = this.formGroupCreator();
@@ -49,12 +54,12 @@ export class AssesorsComponent implements OnInit {
 
   listAssessors: AssessorModel[] = [];
 
-  openModalAdd(){
+  openModalAdd() {
     disableLabels();
-    this.assessorData =  this.formGroupCreator();
+    this.assessorData = this.formGroupCreator();
     this.option = 'add';
-    openModal('modalAssessor','Agregar Evaluador');
-    setTimeout(()=>{
+    openModal('modalAssessor', 'Agregar Evaluador');
+    setTimeout(() => {
       iniciarSelect();
     }, 1000);
   }
@@ -96,13 +101,13 @@ export class AssesorsComponent implements OnInit {
   }
 
   get specialty() {
-    return this .assessorData.get('specialty');
+    return this.assessorData.get('specialty');
   }
 
   get email() {
     return this.assessorData.get('email');
   }
-      
+
 
   ngOnInit() {
     iniciarSelect();
@@ -117,17 +122,19 @@ export class AssesorsComponent implements OnInit {
   register(): void {
     if (this.assessorData.valid) {
       if (this.option == 'add') {
-        console.log('oe add');
         this.spinner.show();
+        let pass = CryptoJS.SHA256('' + (Math.random() * (4000000 - 0) + 0), '12hjb2j1hb21hj3hj213').toString().substr(0, 10);
         let dataUser: UserModel = {
           id: null,
           realm: '',
           username: `${this.assessorData.get('first_name').value} ${this.assessorData.get('first_last_name').value}`,
           email: this.assessorData.get('email').value,
-          password: '12345678',
+          password: pass,
           rol: 3,
           user: null
         };
+
+        let hash = CryptoJS.SHA256('' + (Math.random() * (4000000 - 0) + 0), '12hjb2j1hb21hj3hj213').toString();
 
         let dataAssessor: AssessorModel = {
           first_name: this.assessorData.get('first_name').value,
@@ -139,24 +146,36 @@ export class AssesorsComponent implements OnInit {
           level_education: this.assessorData.get('level_education').value,
           specialty: this.assessorData.get('specialty').value,
           user_id: '',
-          author_id: this.infoUser.id,
-          // state: 'pendiente de respuesta',
-          state: 'evaluador',
+          editor_id: this.infoUser.id,
+          state: 'pendiente de respuesta',
+          hash: hash,
           id: null,
           user: null
         };
 
-        this.userService.createNew(dataUser).subscribe(item => {
-          dataAssessor.user_id = item.id;
+        this.userService.createNew(dataUser).subscribe(user => {
+          dataAssessor.user_id = user.id;
           this.assessorService.createNew(dataAssessor).subscribe(item => {
-            this.spinner.hide();
-            Swal.fire('Logrado!',
-              'Se ha registrado Correctamente el evaluador',
-              'success').then(() => {
-                this.assessorData = this.formGroupCreator();
-                this.closeModal();
-                this.loadAssessorData();
-              });
+            //enviar email al nuevo evaluador
+            this.emailService.sendEmail(`
+            Has sido invitado para participar como un nuevo evaluador de la revista, si deseas aceptar la invitación por favor sigue el enlace y confirma tu colaboración.
+            <br>
+            <h4>Enlace para confirmar participación</h4>
+            <a href="http://localhost:4200/confirmAsesor/${hash}">http://localhost:4200/confirmAsesor/${hash}</a>
+            <br>
+            <h4>Credenciales de acceso</h4>
+            Usuario: ${user.email}<br>
+            Contraseña: ${pass}
+            <br>`, 'Nuevo Evaluador', user.email).subscribe(() => {
+              this.spinner.hide();
+              Swal.fire('Logrado!',
+                'Se ha registrado Correctamente el evaluador',
+                'success').then(() => {
+                  this.assessorData = this.formGroupCreator();
+                  this.closeModal();
+                  this.loadAssessorData();
+                });
+            });
           }, (err) => {
             this.spinner.hide();
             Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
@@ -219,14 +238,14 @@ export class AssesorsComponent implements OnInit {
     }, (err) => {
       this.spinner.hide();
       Swal.fire({
-        title: 'Error!', 
-        text: 'Ocurrió un error al cargar los registros,¿Desea intentar de nuevo?', 
-        type : 'error',
+        title: 'Error!',
+        text: 'Ocurrió un error al cargar los registros,¿Desea intentar de nuevo?',
+        type: 'error',
         showCancelButton: true,
         confirmButtonText: 'Si',
         cancelButtonText: 'No'
-      }).then((res)=>{
-        if(res){
+      }).then((res) => {
+        if (res) {
           this.loadAssessorData();
         }
       });
@@ -258,7 +277,7 @@ export class AssesorsComponent implements OnInit {
     });
   }
 
-  deleteAssessor(assessor){
+  deleteAssessor(assessor) {
     Swal.fire({
       title: 'Advertencia!',
       text: '¿Seguro de que desea eliminar este registro?',
@@ -266,14 +285,14 @@ export class AssesorsComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Si',
       cancelButtonText: 'No'
-    }).then((res)=>{
-      if(res.value){
+    }).then((res) => {
+      if (res.value) {
         this.spinner.show();
-        this.userService.deleteUser(assessor.user_id).subscribe(()=>{
-          this.assessorService.deleteAssessor(assessor.id).subscribe(()=>{
+        this.userService.deleteUser(assessor.user_id).subscribe(() => {
+          this.assessorService.deleteAssessor(assessor.id).subscribe(() => {
             this.spinner.hide();
             this.loadAssessorData();
-            Swal.fire('Logrado!','Se elimino el registro correctamente','success');
+            Swal.fire('Logrado!', 'Se elimino el registro correctamente', 'success');
           });
         });
       }

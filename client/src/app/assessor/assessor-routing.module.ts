@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListArticlesComponent } from './list-articles/list-articles.component';
 import { LogedGuard } from '../guards/loged.guard';
 import { AssesorGuard } from '../guards/assesor.guard';
+import { AcceptComponent } from './accept/accept.component';
+import { NotLoginGuard } from '../guards/not-login.guard';
 
 const routes: Routes = [
   {
@@ -10,6 +12,13 @@ const routes: Routes = [
     component: ListArticlesComponent,
     canActivate:[
       LogedGuard,AssesorGuard
+    ]
+  },
+  {
+    path: 'confirmAsesor/:hash',
+    component: AcceptComponent,
+    canActivate :[
+      NotLoginGuard
     ]
   }
 ];

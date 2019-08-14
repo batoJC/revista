@@ -23,7 +23,6 @@ export class EditorService {
 
   // list of editors
   loadEditors(): Observable<EditorModel[]> {
-    // let filter = JSON.stringify({"where":{},"include":"user"})
     return this.http.get<EditorModel[]>(`${base_url}editors`);
   }
 
@@ -41,5 +40,11 @@ export class EditorService {
   deleteEditor(editorId: String): Observable<EditorModel> {
     return this.http.delete<EditorModel>(`${base_url}editors/${editorId}`);
   };
+
+  findEditorById(id:string): Observable<EditorModel>{
+    let filter = JSON.stringify({"where":{},"include":"user"});
+    return this.http.delete<EditorModel>(`${base_url}editors/${id}?filter=${filter}`);
+  }
+
 
 }
