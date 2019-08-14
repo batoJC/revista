@@ -122,7 +122,6 @@ export class RegisterComponent implements OnInit {
       };
 
       //generar hash
-     
       let hash = CryptoJS.SHA256( this.registerData.get('password').value + (Math.random() * (4000000 - 0) + 0), '12hjb2j1hb21hj3hj213').toString();
 
       let dataAuthor: AuthorModel = {

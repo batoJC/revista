@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import { UserModel } from 'src/app/models/user.model';
 import { EditorModel } from 'src/app/models/editor.model';
 import { UserauthService } from 'src/app/services/userauth.service';
+import * as CryptoJS from 'crypto-js';
+import { EmailService } from 'src/app/services/email.service';
 
 
 declare const iniciarSelect: any;
@@ -25,7 +27,7 @@ export class EditorsComponent implements OnInit {
 
   token: string = ''
 
-  constructor(private editorService: EditorService, private userService: UserService, private spinner: NgxSpinnerService, private authService: UserauthService) {
+  constructor(private editorService: EditorService, private userService: UserService, private spinner: NgxSpinnerService, private authService: UserauthService, private emailService: EmailService) {
     this.token = authService.getToken();
     this.editorData = this.formGroupCreator();
     this.loadEditorsData();
@@ -54,9 +56,9 @@ export class EditorsComponent implements OnInit {
     this.editorData = this.formGroupCreator();
     this.option = 'add';
     openModal('modalEditor', 'Agregar Editor');
-    setTimeout(()=>{
+    setTimeout(() => {
       iniciarSelect();
-    },1000);
+    }, 1000);
   }
 
   closeModal() {
@@ -112,14 +114,14 @@ export class EditorsComponent implements OnInit {
   register(): void {
     if (this.editorData.valid) {
       if (this.option == 'add') {
-        console.log('oe add');
+        let pass = CryptoJS.SHA256('' + (Math.random() * (4000000 - 0) + 0), '12hjb2j1hb21hj3hj213').toString().substr(0, 10);
         this.spinner.show();
         let dataUser: UserModel = {
           id: null,
           realm: '',
           username: `${this.editorData.get('first_name').value} ${this.editorData.get('first_last_name').value}`,
           email: this.editorData.get('email').value,
-          password: '12345678',
+          password: pass,
           rol: 2,
           user: null
         };
@@ -138,15 +140,17 @@ export class EditorsComponent implements OnInit {
 
         this.userService.createNew(dataUser).subscribe(item => {
           dataEditor.user_id = item.id;
-          this.editorService.createNew(dataEditor).subscribe(item => {
-            this.spinner.hide();
-            Swal.fire('Logrado!',
-              'Se ha registrado Correctamente el editor',
-              'success').then(() => {
-                this.editorData = this.formGroupCreator();
-                this.closeModal();
-                this.loadEditorsData();
-              });
+          this.editorService.createNew(dataEditor).subscribe(edit => {
+            this.emailService.sendEmail(`Ha sido agregado como editor en el sistema de nuestra revista por gavor siga el enlace e inicie sesión con su correo electronico y la siguiente contraseña.<br>contraseña:${pass}`, 'Nuevo usuario', item.email).subscribe(() => {
+              this.spinner.hide();
+              Swal.fire('Logrado!',
+                'Se ha registrado Correctamente el editor',
+                'success').then(() => {
+                  this.editorData = this.formGroupCreator();
+                  this.closeModal();
+                  this.loadEditorsData();
+                });
+            });
           }, (err) => {
             this.spinner.hide();
             Swal.fire('Error!', 'Ocurrió un error al realizar el registro', 'error');
@@ -208,14 +212,14 @@ export class EditorsComponent implements OnInit {
     }, (err) => {
       this.spinner.hide();
       Swal.fire({
-        title: 'Error!', 
-        text: 'Ocurrió un error al cargar los registros,¿Desea intentar de nuevo?', 
-        type : 'error',
+        title: 'Error!',
+        text: 'Ocurrió un error al cargar los registros,¿Desea intentar de nuevo?',
+        type: 'error',
         showCancelButton: true,
         confirmButtonText: 'Si',
         cancelButtonText: 'No'
-      }).then((res)=>{
-        if(res){
+      }).then((res) => {
+        if (res) {
           this.loadEditorsData();
         }
       });
@@ -247,7 +251,7 @@ export class EditorsComponent implements OnInit {
   }
 
 
-  deleteEditor(editor){
+  deleteEditor(editor) {
     Swal.fire({
       title: 'Advertencia!',
       text: '¿Seguro de que desea eliminar este registro?',
@@ -255,14 +259,14 @@ export class EditorsComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Si',
       cancelButtonText: 'No'
-    }).then((res)=>{
-      if(res.value){
+    }).then((res) => {
+      if (res.value) {
         this.spinner.show();
-        this.userService.deleteUser(editor.user_id).subscribe(()=>{
-          this.editorService.deleteEditor(editor.id).subscribe(()=>{
+        this.userService.deleteUser(editor.user_id).subscribe(() => {
+          this.editorService.deleteEditor(editor.id).subscribe(() => {
             this.spinner.hide();
             this.loadEditorsData();
-            Swal.fire('Logrado!','Se elimino el registro correctamente','success');
+            Swal.fire('Logrado!', 'Se elimino el registro correctamente', 'success');
           });
         });
       }

@@ -1,3 +1,5 @@
+import { UserModel } from './user.model';
+
 export interface EditorModel {
     first_name: string;
     second_name: string;
@@ -8,4 +10,5 @@ export interface EditorModel {
     level_education: string;
     user_id: string;
     id: string;
+    user: UserModel;
 }

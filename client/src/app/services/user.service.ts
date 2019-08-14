@@ -28,15 +28,32 @@ export class UserService {
 
   //edit editor
   updateUser(user: UserModel,token): Observable<UserModel> {
-    return this.http.patch<UserModel>(`${base_url}Users/${user.id}?access_token=${token}`, {
-      'email' : user.email,
-      'username' : user.username
-    });
+    return this.http.patch<UserModel>(`${base_url}Users/${user.id}?access_token=${token}`, user);
   }
 
    //delete user
    deleteUser(userId: String): Observable<UserModel> {
     return this.http.delete<UserModel>(`${base_url}Users/${userId}`);
   };
+
+  //find by email
+  findByEmail(email:string):Observable<UserModel>{
+    let filter = JSON.stringify({"where":{'email': email }});
+    return this.http.get<UserModel>(`${base_url}Users/findOne/?filter=${filter}`,{
+      headers: new HttpHeaders({
+        "content-type": "application/json"
+      })
+    });
+  }
+
+  //find by rol
+  findByRol(rol:number):Observable<UserModel[]>{
+    let filter = JSON.stringify({"where":{'rol': rol }});
+    return this.http.get<UserModel[]>(`${base_url}Users?filter=${filter}`,{
+      headers: new HttpHeaders({
+        "content-type": "application/json"
+      })
+    });
+  }
 
 }

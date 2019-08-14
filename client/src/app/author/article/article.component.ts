@@ -14,6 +14,9 @@ import { FilesService } from 'src/app/services/files.service';
 import { isNullOrUndefined } from 'util';
 import { AuthorModel } from 'src/app/models/author.model';
 import { AuthorService } from 'src/app/services/author.service';
+import { EditorService } from 'src/app/services/editor.service';
+import { EmailService } from 'src/app/services/email.service';
+import { UserService } from 'src/app/services/user.service';
 
 declare const updateTextaeras: any;
 declare const disableLabels: any;
@@ -31,12 +34,12 @@ declare const getPdfById: any;
 })
 export class ArticleComponent implements OnInit {
 
-  constructor(private authService: UserauthService, private publishingService: PublishingService, private articleService: ArticleService, private router: Router, private spinner: NgxSpinnerService, private rutaActiva: ActivatedRoute, private fileService: FilesService,private autorService: AuthorService) {
+  constructor(private authService: UserauthService, private publishingService: PublishingService, private articleService: ArticleService, private router: Router, private spinner: NgxSpinnerService, private rutaActiva: ActivatedRoute, private fileService: FilesService, private autorService: AuthorService, private userService:UserService, private emailService: EmailService) {
   }
 
   informationArticle: ArticleModel;
 
-  infoAuthor : AuthorModel;
+  infoAuthor: AuthorModel;
 
   ngOnInit() {
     // updateTextaeras();
@@ -44,7 +47,7 @@ export class ArticleComponent implements OnInit {
     this.publishingService.getActive().subscribe((item) => {
       this.publishing = item;
     });
-    this.autorService.findByUserId(this.user.id).subscribe((item)=>{
+    this.autorService.findByUserId(this.user.id).subscribe((item) => {
       this.infoAuthor = item[0];
     });
 
@@ -223,19 +226,32 @@ export class ArticleComponent implements OnInit {
             assessors: [],
             comments: [],
             id: null,
-            author : null
+            author: null
           }
 
           //enviar al servicio y resar
-          this.articleService.createNew(articleModel).subscribe((item) => {
-            this.spinner.hide();
-            Swal.fire({
-              title: 'Logrado!',
-              text: 'El artículo fue agregado correctamente.',
-              type: 'success'
-            }).then(() => {
-              this.router.navigate(['listArticles']);
+          this.articleService.createNew(articleModel).subscribe((art) => {
+            //enviar emails a los editores
+            this.userService.findByRol(2).subscribe((item) => {
+              console.log(item);
+              let correos = '';
+              item.forEach((e) => {
+                correos += e.email + ',';
+              });
+
+              this.emailService.sendEmail(`Se ha registrado un nuevo artículo.<br>Nombre Artículo: ${art.title}<br>Autor: ${this.infoAuthor.first_name} ${this.infoAuthor.second_name} ${this.infoAuthor.first_last_name} ${this.infoAuthor.second_last_name}`, 'Nuevo Artículo', correos).subscribe(() => {
+                this.spinner.hide();
+                Swal.fire({
+                  title: 'Logrado!',
+                  text: 'El artículo fue agregado correctamente.',
+                  type: 'success'
+                }).then(() => {
+                  this.router.navigate(['listArticles']);
+                });
+              });
+
             });
+
           }, (err) => {
             this.spinner.hide();
             Swal.fire('Error!', 'Ocurrió un error al registrar en el servidor', 'error');
@@ -274,7 +290,7 @@ export class ArticleComponent implements OnInit {
             assessors: this.informationArticle.assessors,
             comments: [],
             id: this.informationArticle.id,
-            author : null
+            author: null
           }
 
           //enviar al servicio y resar
@@ -330,7 +346,7 @@ export class ArticleComponent implements OnInit {
                 assessors: this.informationArticle.assessors,
                 comments: [],
                 id: this.informationArticle.id,
-                author : null
+                author: null
               }
 
               //enviar al servicio y resar

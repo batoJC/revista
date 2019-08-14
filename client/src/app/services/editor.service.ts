@@ -23,6 +23,7 @@ export class EditorService {
 
   // list of editors
   loadEditors(): Observable<EditorModel[]> {
+    // let filter = JSON.stringify({"where":{},"include":"user"})
     return this.http.get<EditorModel[]>(`${base_url}editors`);
   }
 
