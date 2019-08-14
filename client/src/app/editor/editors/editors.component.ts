@@ -121,7 +121,7 @@ export class EditorsComponent implements OnInit {
           realm: '',
           username: `${this.editorData.get('first_name').value} ${this.editorData.get('first_last_name').value}`,
           email: this.editorData.get('email').value,
-          password: pass,
+          password: CryptoJS.SHA256(pass).toString(),
           rol: 2,
           user: null
         };

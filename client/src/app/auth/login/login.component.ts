@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthorService } from 'src/app/services/author.service';
 import { AssessorService } from 'src/app/services/assessor.service';
+import * as CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: 'app-login',
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
       }
       this.spinner.show();
       let email = this.loginData.get('email').value;
-      let password = this.loginData.get('password').value;
+      let password = CryptoJS.SHA256(this.loginData.get('password').value).toString();
       this.serviceAuth.loginUser(email, password).subscribe(auth => {
         //verificar que el usuario ya tenga confirmado su email
         switch (auth.user.rol) {

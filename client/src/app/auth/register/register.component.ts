@@ -116,7 +116,7 @@ export class RegisterComponent implements OnInit {
         realm: '',
         username: `${this.registerData.get('first_name').value} ${this.registerData.get('first_last_name').value}`,
         email: this.registerData.get('email').value,
-        password: this.registerData.get('password').value,
+        password: CryptoJS.SHA256(this.registerData.get('password').value).toString(),
         rol: 1,
         user: null
       };
