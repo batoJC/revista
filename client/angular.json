@@ -29,7 +29,9 @@
             ],
             "scripts": [
               "node_modules/materialize-css/dist/js/materialize.js",
-              "src/assets/js/main.js"
+              "node_modules/chart.js/dist/Chart.js",
+              "src/assets/js/main.js",
+              "src/assets/js/chart.js"
             ]
           },
           "configurations": {
