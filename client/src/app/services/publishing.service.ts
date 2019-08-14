@@ -48,20 +48,24 @@ export class PublishingService {
   };
 
   //search publishing
-  searchPublishing(id:string): Observable<PublishingModel>{
+  searchPublishing(id: string): Observable<PublishingModel> {
     return this.http.get<PublishingModel>(`${base_url}publishings/${id}?access_token=${this.token}`)
-    
+
   }
 
   //search a publishing active
-  getActive():Observable<PublishingModel>{
-    let filter = JSON.stringify({"where":{'state': true }});
-    return this.http.get<PublishingModel>(`${base_url}publishings/findOne?filter=${filter}&access_token=${this.token}`);
+  getActive(): Observable<PublishingModel> {
+    try {
+      let filter = JSON.stringify({ "where": { 'state': true } });
+      return this.http.get<PublishingModel>(`${base_url}publishings/findOne?filter=${filter}`);
+    } catch (exp) {
+      return null;
+    }
   }
 
   //poner todas las ediciones en false
-  setState():Observable<any>{
-    return this.http.post<any>(`${base_url}publishings/update?where={}&access_token=${this.token}`,{"state":false});
+  setState(): Observable<any> {
+    return this.http.post<any>(`${base_url}publishings/update?where={}&access_token=${this.token}`, { "state": false });
   }
 
 

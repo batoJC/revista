@@ -137,7 +137,7 @@ export class ArticlesComponent implements OnInit {
           });
         });
         //enviar email a los assesores
-        this.emailService.sendEmail(`Se te ha asignado el siguiente artículo para que lo evalues.<br>título: ${this.articleAux.title}<br>Autor: ${this.articleAux.author.first_name}`, 'Asiganación de artículo', correos).subscribe((item) => {
+        this.emailService.sendEmail(`Se te ha asignado el siguiente artículo para que lo evalues.<br>título: ${this.articleAux.title}<br>Autor: ${this.articleAux.author.first_name} ${this.articleAux.author.second_name} ${this.articleAux.author.first_last_name} ${this.articleAux.author.second_last_name}`, 'Asiganación de artículo', correos).subscribe((item) => {
           console.log(item);
           Swal.fire('Logrado!', 'Evaluadores asigandos correctamente.', 'success').then(() => {
           });

@@ -156,7 +156,7 @@ export class ListArticlesComponent implements OnInit {
               }
               this.articleService.update(item).subscribe(() => {
                 this.autorService.findById(item.author_id).subscribe((art)=>{
-                  this.emailService.sendEmail(`El artículo ${item.title} fue calificado y quedo en estado de ${item.state}`,'Resultado evaluación artículo',art.user.email).subscribe((email)=>{
+                  this.emailService.sendEmail(`El artículo ${item.title} fue calificado y quedo en estado de ${item.state}`,'Resultado evaluación artículo',art[0].user.email).subscribe((email)=>{
                     console.log(email);
                     Swal.fire('Logrado!', 'Comentario agregado correctamenta', 'success').then(() => {
                       this.getListArticles();

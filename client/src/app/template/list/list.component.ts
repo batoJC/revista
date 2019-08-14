@@ -17,7 +17,6 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.publishingService.getActive().subscribe((item) => {
-      console.log(item);
       this.articlesService.lista(item.id).subscribe((item) => {
         let i = 0;
         let aux = new Array();
@@ -32,10 +31,11 @@ export class ListComponent implements OnInit {
             aux = new Array();
           }
         });
-        console.log(this.lista);
         this.lista.push(aux);
         this.spinner.hide();
       });
+    },(erro)=>{
+      this.spinner.hide();
     });
   }
 

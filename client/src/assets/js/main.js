@@ -3,7 +3,7 @@ function iniciar() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-
+    iniciar();
 });
 
 function iniciarDatapicker() {
@@ -69,4 +69,10 @@ function disableLabels() {
 function getPdfById(id) {
     let pdf = document.getElementById(id);
     return pdf.files[0];
+}
+
+
+function startTooltip() {
+    var elems = document.querySelectorAll('.tooltip');
+    var instances = M.Tooltip.init(elems, { exitDelay: 1000, enterDelay: 10 });
 }

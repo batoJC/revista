@@ -1,3 +1,35 @@
-<div style="height: 500px;">
+<!-- <div style="height: 500px;">
     <canvas id="maricada"></canvas>
+</div> -->
+<div class="container">
+    <h2 class="center">Estadísticas de la revista</h2>
+    <h5><a routerLink="../evaluadorEstadisticas">Listado de evaluadores por área de formación</a></h5>
+    <h4>Lista de Ediciones</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Volumen</th>
+                <th>Nombre</th>
+                <th class="center">Estadisticas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of listaEdiciones">
+                <td>{{ p.level }}</td>
+                <td>{{ p.name }}</td>
+                <td class="center">
+                    <!-- por estado de envio -->
+                    <a style="margin-right: 8px;" class="btn red"><i class="material-icons tooltip" data-position="top"
+                            data-tooltip="Estadísticas por estado de envío">equalizer</i></a>
+                    <!-- articulos por autor -->
+                    <a routerLink="estadoEnvio/{{ p.id }}" style="margin-right: 8px;" class="btn green " ><i
+                            class="material-icons tooltip"
+                            data-tooltip="Estadísticas de artículos por autor" data-position="top">equalizer</i></a>
+                    <!-- porcentaje de aceptación -->
+                    <a class="btn  orange"><i class="material-icons tooltip" data-position="top"
+                            data-tooltip="Estadísticas de porcentaje de aceptación">equalizer</i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

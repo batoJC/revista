@@ -8,6 +8,8 @@ import { CommentModel } from 'src/app/models/comment.model';
 import * as jsPDF from 'jspdf';
 import { FilesService } from 'src/app/services/files.service';
 import Swal from 'sweetalert2';
+import { AuthorService } from 'src/app/services/author.service';
+import { AuthorModel } from 'src/app/models/author.model';
 
 
 declare const openModal: any;
@@ -22,20 +24,24 @@ declare const getPdfById: any;
 })
 export class ListArticleComponent implements OnInit {
 
-  constructor(private articleService: ArticleService, private spinner: NgxSpinnerService, private authService: UserauthService, private fileService: FilesService) { }
+  constructor(private articleService: ArticleService, private spinner: NgxSpinnerService, private authService: UserauthService, private fileService: FilesService, private authorService:AuthorService) { }
 
+  infoAuthor: AuthorModel;
   usuario: UserModel = null;
 
   ngOnInit() {
     this.usuario = this.authService.getUserInformation();
-    this.getListArticles();
+    this.authorService.findByUserId(this.usuario.id).subscribe((item) => {
+      this.infoAuthor = item[0];
+      this.getListArticles();
+    });
   }
 
   listArticles: ArticleModel[];
 
   getListArticles() {
     this.spinner.show();
-    this.articleService.loadPublishing(this.usuario.id).subscribe((item) => {
+    this.articleService.loadPublishing(this.infoAuthor.id).subscribe((item) => {
       this.listArticles = item;
       this.spinner.hide();
     }, () => {
@@ -67,17 +73,17 @@ export class ListArticleComponent implements OnInit {
       doc.setTextColor(0, 0, 255);
       doc.text(30, contador, fecha);
       doc.setTextColor(0, 0, 0);
-      contador += 20;
+      contador += 30;
       doc.setFontSize(20);
       doc.text(50, contador, nombre);
-      contador += 15;
+      contador += 20;
       doc.setFontSize(12);
       doc.text(50, contador, body);
-      contador += (body.length * 10) + 15;
+      contador += (body.length * 12) + 15;
       doc.setFontSize(8);
       doc.setTextColor(0, 0, 255);
       doc.text(50, contador, `${element.stars} Estrellas`);
-      contador += 20
+      contador += 15
     });
     // doc.output('datauri');
 

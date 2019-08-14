@@ -123,13 +123,13 @@ export class AssesorsComponent implements OnInit {
     if (this.assessorData.valid) {
       if (this.option == 'add') {
         this.spinner.show();
-        let pass = CryptoJS.SHA256(CryptoJS.SHA256('' + (Math.random() * (4000000 - 0) + 0), '12hjb2j1hb21hj3hj213').toString().substr(0, 10)).toString();
+        let pass = CryptoJS.SHA256('' + (Math.random() * (4000000 - 0) + 0), '12hjb2j1hb21hj3hj213').toString().substr(0, 10);
         let dataUser: UserModel = {
           id: null,
           realm: '',
           username: `${this.assessorData.get('first_name').value} ${this.assessorData.get('first_last_name').value}`,
           email: this.assessorData.get('email').value,
-          password: pass,
+          password: CryptoJS.SHA256(pass).toString(),
           rol: 3,
           user: null
         };

@@ -1,0 +1,116 @@
+<div class="container">
+    <br>
+    <div style="height: auto;">
+        <canvas id="evaluadores"></canvas>
+    </div>
+
+    <div *ngIf="listaGames.length > 0">
+        <h4>Evaluadores expertos en Video-Games</h4>
+        <table id="games">
+            <thead>
+                <tr>
+                    <th>Nombre Completo</th>
+                    <th>Nivel de Formación</th>
+                    <th>País</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let g of listaGames">
+                    <td>{{ g.first_name + ' ' + g.second_name + ' ' + g.first_last_name + ' ' + g.second_last_name }}
+                    </td>
+                    <td>{{ g.level_education }}</td>
+                    <td>{{ g.country }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    <div *ngIf="listaMusica.length > 0">
+        <h4>Evaluadores expertos en Musica</h4>
+        <table id="musica">
+            <thead>
+                <tr>
+                    <th>Nombre Completo</th>
+                    <th>Nivel de Formación</th>
+                    <th>País</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let m of listaMusica">
+                    <td>{{ m.first_name + ' ' + m.second_name + ' ' + m.first_last_name + ' ' + m.second_last_name }}
+                    </td>
+                    <td>{{ m.level_education }}</td>
+                    <td>{{ m.country }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    <div *ngIf="listaIngenieria.length > 0">
+        <h4>Evaluadores expertos en ingeniería</h4>
+        <table id="ingenieria">
+            <thead>
+                <tr>
+                    <th>Nombre Completo</th>
+                    <th>Nivel de Formación</th>
+                    <th>País</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of listaingenieria">
+                    <td>{{ i.first_name + ' ' + i.second_name + ' ' + i.first_last_name + ' ' + i.second_last_name }}</td>
+                    <td>{{ i.level_education }}</td>
+                    <td>{{ i.country }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    <div *ngIf="listaBiologia.length > 0">
+
+        <h4>Evaluadores expertos en Biología</h4>
+        <table id="biologia">
+            <thead>
+                <tr>
+                    <th>Nombre Completo</th>
+                    <th>Nivel de Formación</th>
+                    <th>País</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let b of listaBiologia">
+                    <td>{{ b.first_name + ' ' + b.second_name + ' ' + b.first_last_name + ' ' + b.second_last_name }}</td>
+                    <td>{{ b.level_education }}</td>
+                    <td>{{ b.country }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    <div *ngIf="listaOtros.length > 0">
+        <h4>Evaluadores expertos en Otros</h4>
+        <table id="otros">
+            <thead>
+                <tr>
+                    <th>Nombre Completo</th>
+                    <th>Nivel de Formación</th>
+                    <th>País</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let o of listaOtros">
+                    <td>{{ o.first_name + ' ' + o.second_name + ' ' + o.first_last_name + ' ' + o.second_last_name }}</td>
+                    <td>{{ o.level_education }}</td>
+                    <td>{{ o.country }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col s12 center">
+            <button (click)="generarPDF()" class="btn blue">Descargar listado en PDF</button>
+        </div>
+    </div>
+</div>

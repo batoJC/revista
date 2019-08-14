@@ -7,6 +7,7 @@ import { AssesorsComponent } from './assesors/assesors.component';
 import { PublishingComponent } from './publishing/publishing.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ArticlesComponent } from './articles/articles.component';
+import { EvaluadoresComponent } from './estadisticas/evaluadores/evaluadores.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,13 @@ const routes: Routes = [
     path: 'statistics',
     component: StatisticsComponent,
     canActivate: [
+      LogedGuard,EditorGuard
+    ]
+  },
+  {
+    path: 'evaluadorEstadisticas',
+    component: EvaluadoresComponent,
+    canActivate:[
       LogedGuard,EditorGuard
     ]
   }

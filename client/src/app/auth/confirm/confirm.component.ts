@@ -22,7 +22,7 @@ export class ConfirmComponent implements OnInit {
       } else {
         console.log(this.author);
         if (this.author.state == 'por confirmar') {
-          this.message = 'Bienvenido al sistema de Nuestra revista esperamos que pueda sentirse muy agusto con nuestro sistema';
+          this.message = 'Bienvenido al sistema de Nuestra revista esperamos que pueda sentirse muy a gusto con nuestro sistema';
           this.action = true;
         } else {
           this.message = 'Usted ya confirmo su correo anteriormente';
