@@ -104,8 +104,7 @@ export class PublishingComponent implements OnInit {
         this.publishingService.setState().subscribe((item)=>{
           this.publishingService.createNew(dataPublishing).subscribe(item => {
             this.spinner.hide();
-            Swal.fire('Logrado!',
-              'Se ha registrado Correctamente la publicación',
+            Swal.fire('Logrado!','Se ha registrado Correctamente la publicación',
               'success').then(() => {
                 this.publishingData = this.formGroupCreator();
                 this.closeModal();

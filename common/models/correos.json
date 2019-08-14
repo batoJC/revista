@@ -12,7 +12,7 @@
   "acls": [
     {
       "principalType":"ROLE",
-      "principalId": "$every",
+      "principalId": "$everyone",
       "permission": "ALLOW"
     }
   ],
