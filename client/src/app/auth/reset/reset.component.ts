@@ -32,7 +32,7 @@ export class ResetComponent implements OnInit {
     this.userService.findByEmail(this.email).subscribe((item) => {
       let pass = CryptoJS.SHA256('' + (Math.random() * (4000000 - 0) + 0), '12hjb2j1hb21hj3hj213').toString().substr(0, 10);
       item.password = pass;
-      this.userService.updateUser(item, '').subscribe((item) => {
+      this.userService.updateUser(item).subscribe((item) => {
         this.emailService.sendEmail(`Usted pidio un cambio de contraseña<br>Constraseña:${pass}`, 'Recuperar Contraseña', item.email).subscribe(() => {
           Swal.fire('Logrado!', 'La nueva contraseña fue enviada a su correo', 'success').then(() => {
             this.router.navigate(['login']);

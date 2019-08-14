@@ -180,7 +180,7 @@ export class EditorsComponent implements OnInit {
         this.dataEditor.phone = this.editorData.get('phone').value;
         this.dataEditor.level_education = this.editorData.get('level_education').value;
 
-        this.userService.updateUser(this.dataUser, this.token).subscribe((item) => {
+        this.userService.updateUser(this.dataUser).subscribe((item) => {
           this.editorService.updateEditor(this.dataEditor).subscribe(item => {
             this.spinner.hide();
             Swal.fire('Logrado!',
@@ -228,7 +228,7 @@ export class EditorsComponent implements OnInit {
   }
 
   loadData(editor) {
-    this.userService.findUser(editor.user_id, this.token).subscribe((item) => {
+    this.userService.findUser(editor.user_id).subscribe((item) => {
       this.dataEditor = editor;
       this.dataUser = item;
       this.editorData = new FormGroup({

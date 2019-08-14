@@ -43,7 +43,7 @@ export class AcceptComponent implements OnInit {
     this.assessor.state = state;
     this.assessorService.updateAssessor(this.assessor).subscribe((item) => {
       let msg = (state == 'evaluador')? 'confirmado' : 'rechazado';
-    this.userService.findUser(this.assessor.editor_id,'').subscribe((item)=>{
+    this.userService.findUser(this.assessor.editor_id).subscribe((item)=>{
       this.emailService.sendEmail(`El evaluador ${this.assessor.first_name} ${this.assessor.second_name} ${this.assessor.first_last_name} ${this.assessor.second_last_name} a ${msg} la participación en la revista`,'Confirmación evaluador',item.email).subscribe(item => {
         Swal.fire('Logrado!', 'Se ha confirmado tu participación en la revista, ahora ya puedes iniciar sesión', 'success').then(() => {
           this.router.navigate(['login']);

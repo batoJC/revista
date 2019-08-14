@@ -3,6 +3,7 @@ import { ArticleModel } from '../models/article.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommentModel } from '../models/comment.model';
+import { UserauthService } from './userauth.service';
 
 const base_url = 'http://localhost:3000/api/';
 
@@ -12,12 +13,15 @@ const base_url = 'http://localhost:3000/api/';
 })
 export class ArticleService {
 
-  constructor(private http: HttpClient) { 
+  token = '';
 
+  constructor(private http: HttpClient,private auth: UserauthService) { 
+    this.token = this.auth.getToken();
   }
 
   createNew(publishing: ArticleModel): Observable<ArticleModel> {
-    return this.http.post<ArticleModel>(`${base_url}articles`, publishing,
+    let token = this.auth.getToken();
+    return this.http.post<ArticleModel>(`${base_url}articles?accessToken=${this.token}`, publishing,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -28,35 +32,35 @@ export class ArticleService {
   // list of articles for state and publishing
   loadPublishings(state:string,publishing:string): Observable<ArticleModel[]> {
     let filter = JSON.stringify({"where":{'publishing_id': publishing,'state':state }});
-    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}`);
+    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}&accessToken=${this.token}`);
   }
 
   // list of articles to publishing
   loadPublishingsById(publishing:string): Observable<ArticleModel[]> {
     let filter = JSON.stringify({"where":{'publishing_id': publishing},"include":"author"});
-    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}`);
+    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}&accessToken=${this.token}`);
   }
 
   //list public articles
   lista(publishing:string): Observable<ArticleModel[]> {
     let filter = JSON.stringify({"where":{'publishing_id': publishing,'state':'aceptado'},"include":"author"});
-    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}`);
+    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}&accessToken=${this.token}`);
   }
 
   // list of articles for author
   loadPublishing(author_id:string): Observable<ArticleModel[]> {
     let filter = JSON.stringify({"where":{'author_id': author_id }});
-    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}`);
+    return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}&accessToken=${this.token}`);
   }
 
   //find information the article with id
   searchById(id:string):Observable<ArticleModel>{
-    return this.http.get<ArticleModel>(`${base_url}articles/${id}?filter[include]=comments`);
+    return this.http.get<ArticleModel>(`${base_url}articles/${id}?filter[include]=comments&accessToken=${this.token}`);
   }
 
   //edit article
   update(article: ArticleModel):Observable<ArticleModel>{
-    return this.http.put<ArticleModel>(`${base_url}articles/${article.id}`, article,
+    return this.http.put<ArticleModel>(`${base_url}articles/${article.id}?accessToken=${this.token}`, article,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"

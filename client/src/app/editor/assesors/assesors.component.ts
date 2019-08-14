@@ -205,7 +205,7 @@ export class AssesorsComponent implements OnInit {
         this.dataAssessor.level_education = this.assessorData.get('level_education').value;
         this.dataAssessor.specialty = this.assessorData.get('specialty').value;
 
-        this.userService.updateUser(this.dataUser, this.token).subscribe((item) => {
+        this.userService.updateUser(this.dataUser).subscribe((item) => {
           this.assessorService.updateAssessor(this.dataAssessor).subscribe(item => {
             this.spinner.hide();
             Swal.fire('Logrado!',
@@ -253,7 +253,7 @@ export class AssesorsComponent implements OnInit {
   }
 
   loadData(assessor) {
-    this.userService.findUser(assessor.user_id, this.token).subscribe((item) => {
+    this.userService.findUser(assessor.user_id).subscribe((item) => {
       this.dataAssessor = assessor;
       this.dataUser = item;
       this.assessorData = new FormGroup({

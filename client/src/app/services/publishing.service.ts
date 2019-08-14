@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PublishingModel } from '../models/publishing.model';
 import { Observable } from 'rxjs';
+import { UserauthService } from './userauth.service';
 
 const base_url = 'http://localhost:3000/api/';
 
@@ -11,11 +12,14 @@ const base_url = 'http://localhost:3000/api/';
 })
 export class PublishingService {
 
-  constructor(private http: HttpClient) { }
+  token = '';
+  constructor(private http: HttpClient, private auth: UserauthService) {
+    this.token = this.auth.getToken();
+  }
 
 
   createNew(publishing: PublishingModel): Observable<PublishingModel> {
-    return this.http.post<PublishingModel>(`${base_url}publishings`, publishing,
+    return this.http.post<PublishingModel>(`${base_url}publishings?accessToken=${this.token}`, publishing,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -25,12 +29,12 @@ export class PublishingService {
 
   // list of publishings
   loadPublishings(): Observable<PublishingModel[]> {
-    return this.http.get<PublishingModel[]>(`${base_url}publishings`);
+    return this.http.get<PublishingModel[]>(`${base_url}publishings?accessToken=${this.token}`);
   }
 
   //edit publishing
   updatePublishing(publishing: PublishingModel): Observable<PublishingModel> {
-    return this.http.put<PublishingModel>(`${base_url}publishings/${publishing.id}`, publishing,
+    return this.http.put<PublishingModel>(`${base_url}publishings/${publishing.id}?accessToken=${this.token}`, publishing,
       {
         headers: new HttpHeaders({
           "content-type": "application/json"
@@ -40,24 +44,24 @@ export class PublishingService {
 
   //delete publishing
   deletePublishing(publishingId: String): Observable<PublishingModel> {
-    return this.http.delete<PublishingModel>(`${base_url}publishings/${publishingId}`);
+    return this.http.delete<PublishingModel>(`${base_url}publishings/${publishingId}?accessToken=${this.token}`);
   };
 
   //search publishing
   searchPublishing(id:string): Observable<PublishingModel>{
-    return this.http.get<PublishingModel>(`${base_url}publishings/${id}`)
+    return this.http.get<PublishingModel>(`${base_url}publishings/${id}?accessToken=${this.token}`)
     
   }
 
   //search a publishing active
   getActive():Observable<PublishingModel>{
     let filter = JSON.stringify({"where":{'state': true }});
-    return this.http.get<PublishingModel>(`${base_url}publishings/findOne?filter=${filter}`);
+    return this.http.get<PublishingModel>(`${base_url}publishings/findOne?filter=${filter}&accessToken=${this.token}`);
   }
 
   //poner todas las ediciones en false
   setState():Observable<any>{
-    return this.http.post<any>(`${base_url}publishings/update?where={}`,{"state":false});
+    return this.http.post<any>(`${base_url}publishings/update?where={}&accessToken=${this.token}`,{"state":false});
   }
 
 
