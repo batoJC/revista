@@ -12,9 +12,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { EvaluadoresComponent } from './estadisticas/evaluadores/evaluadores.component';
 import { EstadoComponent } from './estadisticas/estado/estado.component';
 import { AceptacionComponent } from './estadisticas/aceptacion/aceptacion.component';
+import { AutoresComponent } from './estadisticas/autores/autores.component';
 
 @NgModule({
-  declarations: [EditorsComponent, AssesorsComponent, PublishingComponent, ArticlesComponent, StatisticsComponent, EvaluadoresComponent, EstadoComponent, AceptacionComponent],
+  declarations: [EditorsComponent, AssesorsComponent, PublishingComponent, ArticlesComponent, StatisticsComponent, EvaluadoresComponent, EstadoComponent, AceptacionComponent, AutoresComponent],
   imports: [
     CommonModule,
     EditorRoutingModule,

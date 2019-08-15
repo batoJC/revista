@@ -44,7 +44,7 @@ function initBar(id,labels,data,title) {
         options: {
             scales: {
                 xAxes: [{
-                    stacked: true
+                    barThickness: 20
                 }],
                 yAxes: [{
                     stacked: true

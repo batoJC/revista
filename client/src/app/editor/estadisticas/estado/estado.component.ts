@@ -17,7 +17,7 @@ declare const initBar: any;
 export class EstadoComponent implements OnInit {
 
   constructor(private articleService: ArticleService, private spinner: NgxSpinnerService, private rutaActiva: ActivatedRoute) {
-    this.spinner.show()
+    this.spinner.show();
     let nombres = new Array('enviado', 'en evaluación', 'rechazado', 'aceptado con cambios', 'aceptado');
     let id = this.rutaActiva.snapshot.paramMap.get('id');
     let data = new Array();
@@ -74,7 +74,7 @@ export class EstadoComponent implements OnInit {
 
     let contador = (isNullOrUndefined(doc.previousAutoTable.finalY)) ? 0 : doc.previousAutoTable.finalY;
     if (this.listaEnviado.length > 0) {
-      doc.text(14, 0, "Artículos enviados");
+      doc.text(14, 15, "Artículos enviados");
       doc.autoTable({ startY: contador + 20, html: '#enviados' });
     }
 

@@ -72,7 +72,7 @@ export class EvaluadoresComponent implements OnInit {
 
     let contador = (isNullOrUndefined(doc.previousAutoTable.finalY)) ? 0 : doc.previousAutoTable.finalY;
     if (this.listaBiologia.length > 0) {
-      doc.text(14, 0, "Evaluadores expertos en Biologia");
+      doc.text(14, 15, "Evaluadores expertos en Biologia");
       doc.autoTable({ startY: contador + 20, html: '#biologia' });
     }
 

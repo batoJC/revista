@@ -130,7 +130,7 @@ export class AceptacionComponent implements OnInit {
 
     let contador = (isNullOrUndefined(doc.previousAutoTable.finalY)) ? 0 : doc.previousAutoTable.finalY;
     if (this.data.length > 0) {
-      doc.text(14, 0, "Listado de las diferentes ediciones de la revista");
+      doc.text(14, 15, "Listado de las diferentes ediciones de la revista");
       doc.autoTable({ startY: contador + 20, html: '#datos' });
     }
 

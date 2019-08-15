@@ -10,6 +10,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { EvaluadoresComponent } from './estadisticas/evaluadores/evaluadores.component';
 import { EstadoComponent } from './estadisticas/estado/estado.component';
 import { AceptacionComponent } from './estadisticas/aceptacion/aceptacion.component';
+import { AutoresComponent } from './estadisticas/autores/autores.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,13 @@ const routes: Routes = [
   {
     path: 'aceptacion',
     component : AceptacionComponent,
+    canActivate:[
+      LogedGuard,EditorGuard
+    ]
+  },
+  {
+    path: 'articulosPorAutor/:id',
+    component : AutoresComponent,
     canActivate:[
       LogedGuard,EditorGuard
     ]

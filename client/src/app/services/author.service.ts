@@ -26,6 +26,11 @@ export class AuthorService {
       });
   }
 
+  // list of assessors
+  loadAuthors(): Observable<AuthorModel[]> {
+    return this.http.get<AuthorModel[]>(`${base_url}authors?access_token=${this.token}`);
+  }
+
   findByUserId(id): Observable<AuthorModel> {
     let filter = JSON.stringify({ "where": { 'user_id': id } });
     return this.http.get<AuthorModel>(`${base_url}authors?filter=${filter}&access_token=${this.token}`);
