@@ -24,6 +24,9 @@ declare const getPdfById: any;
 })
 export class ListArticleComponent implements OnInit {
 
+  cp:number = 1;
+  total:number = 0;
+
   constructor(private articleService: ArticleService, private spinner: NgxSpinnerService, private authService: UserauthService, private fileService: FilesService, private authorService:AuthorService) { }
 
   infoAuthor: AuthorModel;

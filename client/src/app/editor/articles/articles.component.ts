@@ -26,6 +26,9 @@ declare const iniciarSelect: any;
 })
 export class ArticlesComponent implements OnInit {
 
+  cp:number = 1;
+  total:number = 0;
+
   constructor(private rutaActiva: ActivatedRoute, private articleService: ArticleService, private spinner: NgxSpinnerService, private publishingService: PublishingService, private assessorService: AssessorService, private emailService: EmailService, private authService: UserService) { }
 
   publishingId: string = '';

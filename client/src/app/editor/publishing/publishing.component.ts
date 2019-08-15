@@ -21,7 +21,8 @@ declare const getDato: any;
 export class PublishingComponent implements OnInit {
 
   token: string = ''
-
+  cp:number = 1;
+  total:number = 0;
   dato = '';
 
   constructor(private publishingService: PublishingService, private spinner: NgxSpinnerService, private authService: UserauthService) {

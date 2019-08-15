@@ -30,6 +30,8 @@ export class AssesorsComponent implements OnInit {
   infoUser: UserModel;
   assessorData: FormGroup;
 
+  cp:number = 1;
+  total:number = 0;
   constructor(private assessorService: AssessorService, private userService: UserService, private spinner: NgxSpinnerService, private authService: UserauthService, private emailService: EmailService,private editorService:EditorService) {
     this.token = authService.getToken();
     this.infoUser = this.authService.getUserInformation();

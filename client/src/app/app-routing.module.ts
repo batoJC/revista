@@ -8,6 +8,7 @@ import { LogedGuard } from './guards/loged.guard';
 import { EditorGuard } from './guards/editor.guard';
 import { AuthorModule } from './author/author.module';
 import { AssessorModule } from './assessor/assessor.module';
+import { NotFoundComponent } from './template/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
       LogedGuard
     ]
   },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: NotFoundComponent
+  }
 ];
 
 @NgModule({

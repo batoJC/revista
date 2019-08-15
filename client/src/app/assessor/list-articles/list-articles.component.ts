@@ -28,6 +28,9 @@ declare const updateTextaeras: any;
 })
 export class ListArticlesComponent implements OnInit {
 
+  cp:number = 1;
+  total:number = 0;
+
   constructor(private articleService: ArticleService, private spinner: NgxSpinnerService, private authService: UserauthService, private commentService: CommentService, private assessorService: AssessorService,private userService: UserService,private autorService:AuthorService,private emailService:EmailService) {
     // this.commentService.countByArticle('5d450f6b3b147c265c3f1667').subscribe((item)=>{
     //   console.log(item.count);

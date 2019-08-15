@@ -3,7 +3,7 @@
     <h2>Bienvenido a la revista, usted también puede hacer parte de nosotros solo debe registrarse para empezar a publicar sus artículos.</h2>
 </div>
 
-<div *ngFor="let fila of lista" class="row">
+<div *ngFor="let fila of lista | paginate: { itemsPerPage: 10, currentPage: cp,totalItems : total } " class="row">
     <div *ngFor="let data of fila" class="col s12 m4 center">
         <div class="card">
             <div class="banner">
@@ -24,6 +24,11 @@
             </div>
 
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s4 offset-s8">
+        <pagination-controls (pageChange)="cp = $event"></pagination-controls>
     </div>
 </div>
 <div class="container">

@@ -13,6 +13,8 @@ export class ListComponent implements OnInit {
   constructor(private articlesService: ArticleService, private spinner: NgxSpinnerService, private publishingService: PublishingService) { }
 
   lista: any[] = new Array();
+  cp:number = 1;
+  total:number = 0;
 
   ngOnInit() {
     this.spinner.show();

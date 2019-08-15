@@ -43,20 +43,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let article of listArticles">
+                <tr *ngFor="let article of listArticles | paginate: { itemsPerPage: 10, currentPage: cp,totalItems : total } ">
                     <td>{{ article.id }}</td>
                     <td>{{ article.title }}</td>
                     <td>{{ article.date | date }}</td>
                     <td>{{ article.state | uppercase }}</td>
                     <td class="center">
                         <!-- descargar archivo  -->
-                        <a target="_blanck" href="http://localhost:3000/api/containers/pdf/download/{{ article.file }}" style="margin-right: 8px;" class="btn blue" download>
+                        <a target="_blanck" href="http://localhost:3000/api/containers/pdf/download/{{ article.file }}"
+                            style="margin-right: 8px;" class="btn blue" download>
                             <i class="material-icons">cloud_download</i>
                         </a>
                         <!-- cargar archivo -->
-                        <input style="display: none" (change)="changeFile(article)" id="file{{ article.id }}" type="file">
-                        <label *ngIf="article.state == 'aceptado con cambios'" for="file{{ article.id }}"  style="margin-right: 8px;"
-                            class="btn blue">
+                        <input style="display: none" (change)="changeFile(article)" id="file{{ article.id }}"
+                            type="file">
+                        <label *ngIf="article.state == 'aceptado con cambios'" for="file{{ article.id }}"
+                            style="margin-right: 8px;" class="btn blue">
                             <i class="material-icons">cloud_upload</i>
                         </label>
                         <!-- comentarios  *ngIf="article.state == 'enviada'" -->
@@ -73,5 +75,10 @@
                 </tr>
             </tbody>
         </table>
+        <div class="row">
+            <div class="col s4 offset-s8">
+                <pagination-controls (pageChange)="cp = $event"></pagination-controls>
+            </div>
+        </div>
     </div>
 </div>

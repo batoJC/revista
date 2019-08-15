@@ -13,6 +13,7 @@ import { EvaluadoresComponent } from './estadisticas/evaluadores/evaluadores.com
 import { EstadoComponent } from './estadisticas/estado/estado.component';
 import { AceptacionComponent } from './estadisticas/aceptacion/aceptacion.component';
 import { AutoresComponent } from './estadisticas/autores/autores.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [EditorsComponent, AssesorsComponent, PublishingComponent, ArticlesComponent, StatisticsComponent, EvaluadoresComponent, EstadoComponent, AceptacionComponent, AutoresComponent],
@@ -21,7 +22,8 @@ import { AutoresComponent } from './estadisticas/autores/autores.component';
     EditorRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class EditorModule { }

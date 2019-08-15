@@ -26,7 +26,9 @@ declare const disableLabels: any;
 export class EditorsComponent implements OnInit {
 
   token: string = ''
-
+  cp:number = 1;
+  total:number = 0;
+  
   constructor(private editorService: EditorService, private userService: UserService, private spinner: NgxSpinnerService, private authService: UserauthService, private emailService: EmailService) {
     this.token = authService.getToken();
     this.editorData = this.formGroupCreator();

@@ -47,10 +47,6 @@
     "dataSource": "db",
     "public": true
   },
-  "message": {
-    "dataSource": "db",
-    "public": true
-  },
   "editor": {
     "dataSource": "db",
     "public": true

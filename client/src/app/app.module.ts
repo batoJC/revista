@@ -8,6 +8,9 @@ import { NavComponent } from './template/nav/nav.component';
 import { ListComponent } from './template/list/list.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MessagesComponent } from './template/messages/messages.component';
+import { NotFoundComponent } from './template/not-found/not-found.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -15,12 +18,14 @@ import { MessagesComponent } from './template/messages/messages.component';
     FooterComponent,
     NavComponent,
     ListComponent,
-    MessagesComponent
+    MessagesComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
