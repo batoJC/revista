@@ -111,7 +111,6 @@ export class ListArticlesComponent implements OnInit {
             ebody: e.body
           };
           openModal('infoModal', 'Calificación del artículo');
-          activeLabels();
         }
       });
       if (this.open) {
