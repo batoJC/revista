@@ -27,4 +27,13 @@ export class EstadisticasService {
     });
   }
 
+  countByPublishing(id: string,state:string): Observable<any> {
+    let filter = JSON.stringify({ 'publishing_id': id,"state":state });
+    return this.http.get<any>(`${base_url}articles/count?where=${filter}&access_token=${this.token}`, {
+      headers: new HttpHeaders({
+        "content-type": "application/json"
+      })
+    });
+  }
+
 }

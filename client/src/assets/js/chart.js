@@ -54,6 +54,17 @@ function initBar(id,labels,data,title) {
     });
 }
 
+function initLine(id,labels,data) {
+    var ctx = document.getElementById(id).getContext('2d');
 
-
-console.log('hola');
+    var speedData = {
+        labels: labels,
+        datasets: data
+      };
+       
+       
+      var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: speedData
+      });
+}

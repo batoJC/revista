@@ -142,7 +142,7 @@ export class EditorsComponent implements OnInit {
         this.userService.createNew(dataUser).subscribe(item => {
           dataEditor.user_id = item.id;
           this.editorService.createNew(dataEditor).subscribe(edit => {
-            this.emailService.sendEmail(`Ha sido agregado como editor en el sistema de nuestra revista por gavor siga el enlace e inicie sesión con su correo electronico y la siguiente contraseña.<br>contraseña:${pass}`, 'Nuevo usuario', item.email).subscribe(() => {
+            this.emailService.sendEmail(`Ha sido agregado como editor en el sistema de nuestra revista por favor siga el enlace e inicie sesión con su correo electronico y la siguiente contraseña.<br>contraseña:${pass}`, 'Nuevo usuario', item.email).subscribe(() => {
               this.spinner.hide();
               Swal.fire('Logrado!',
                 'Se ha registrado Correctamente el editor',

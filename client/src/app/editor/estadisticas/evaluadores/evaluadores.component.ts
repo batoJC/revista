@@ -5,9 +5,6 @@ import { isNullOrUndefined } from 'util';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { NgxSpinnerService } from 'ngx-spinner';
-// import 'jspdf';
-// import 'jspdf-autotable';
-// declare let jsPDF;
 
 declare const initBar: any;
 
@@ -24,7 +21,6 @@ export class EvaluadoresComponent implements OnInit {
     let data = new Array();
     nombres.forEach((n) => {
       this.estadisticasService.findPorEspecialidad(n).subscribe((item) => {
-        console.log(item);
         if (!isNullOrUndefined(item)) {
           data.push([n, item.length]);
           switch (n) {

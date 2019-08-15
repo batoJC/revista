@@ -8,6 +8,8 @@ import { PublishingComponent } from './publishing/publishing.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { EvaluadoresComponent } from './estadisticas/evaluadores/evaluadores.component';
+import { EstadoComponent } from './estadisticas/estado/estado.component';
+import { AceptacionComponent } from './estadisticas/aceptacion/aceptacion.component';
 
 const routes: Routes = [
   {
@@ -48,6 +50,20 @@ const routes: Routes = [
   {
     path: 'evaluadorEstadisticas',
     component: EvaluadoresComponent,
+    canActivate:[
+      LogedGuard,EditorGuard
+    ]
+  },
+  {
+    path:'estadoEnvio/:id',
+    component:EstadoComponent,
+    canActivate:[
+      LogedGuard,EditorGuard
+    ]
+  },
+  {
+    path: 'aceptacion',
+    component : AceptacionComponent,
     canActivate:[
       LogedGuard,EditorGuard
     ]

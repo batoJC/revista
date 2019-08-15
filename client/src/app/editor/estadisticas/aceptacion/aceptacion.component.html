@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <br><br>
+    <div class="row">
+        <div style="height: auto" class="col s12 m6">
+            <canvas id="dosLineas"></canvas>
+        </div>
+        <div style="height: auto" class="col s12 m6">
+            <canvas id="unaLinea"></canvas>
+        </div>
+    </div>
+    <br>
+</div>
+<div class="container">
+    <h4>Listado de las diferentes ediciones de la revista</h4>
+    <table id="datos">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th class="center">Aceptados</th>
+                <th class="center">Rechazados</th>
+                <th class="center">Porcentaje de aceptación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of data">
+                <td>{{ p[0] }}</td>
+                <td class="center">{{ p[1] }}</td>
+                <td class="center">{{ p[2] }}</td>
+                <td class="center">{{ p[3] }} %</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div class="row">
+        <div class="col s12 center">
+            <button (click)="generarPDF()" class="btn blue">Descargar listado en PDF</button>
+        </div>
+    </div>
+</div>
