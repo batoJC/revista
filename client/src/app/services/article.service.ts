@@ -31,7 +31,7 @@ export class ArticleService {
 
   // list of articles for state and publishing
   loadPublishings(state:string,publishing:string): Observable<ArticleModel[]> {
-    let filter = JSON.stringify({"where":{'publishing_id': publishing,'state':state }});
+    let filter = JSON.stringify({"where":{'publishing_id': publishing,'state':state },"include":"author"});
     return this.http.get<ArticleModel[]>(`${base_url}articles?filter=${filter}&access_token=${this.token}`);
   }
 
