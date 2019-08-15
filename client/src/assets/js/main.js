@@ -74,5 +74,5 @@ function getPdfById(id) {
 
 function startTooltip() {
     var elems = document.querySelectorAll('.tooltip');
-    var instances = M.Tooltip.init(elems, { exitDelay: 1000, enterDelay: 10 });
+    var instances = M.Tooltip.init(elems, { exitDelay: 2000, enterDelay: 10 });
 }

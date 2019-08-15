@@ -44,17 +44,17 @@ export class EvaluadoresComponent implements OnInit {
           data.push([n, 0]);
         }
       })
+      setTimeout(() => {
+        let labels = new Array();
+        let nro = new Array();
+        data.forEach(e => {
+          labels.push(e[0]);
+          nro.push(e[1]);
+        })
+        initBar('evaluadores', labels, nro, 'Evaluadores por área de formación');
+        this.spinner.hide();
+      }, 1000);
     });
-    setTimeout(() => {
-      let labels = new Array();
-      let nro = new Array();
-      data.forEach(e => {
-        labels.push(e[0]);
-        nro.push(e[1]);
-      })
-      initBar('evaluadores', labels, nro, 'Evaluadores por área de formación');
-      this.spinner.hide();
-    }, 1000);
   }
 
   ngOnInit() {
@@ -84,13 +84,13 @@ export class EvaluadoresComponent implements OnInit {
 
     contador = (isNullOrUndefined(doc.previousAutoTable.finalY)) ? 0 : doc.previousAutoTable.finalY;
     if (this.listaIngenieria.length > 0) {
-      doc.text("Evaluadores expertos en Video-Games", 14, contador + 15)
+      doc.text("Evaluadores expertos en ingeniería", 14, contador + 15)
       doc.autoTable({ startY: contador + 20, html: '#ingenieria' });
     }
 
     contador = (isNullOrUndefined(doc.previousAutoTable.finalY)) ? 0 : doc.previousAutoTable.finalY;
     if (this.listaMusica.length > 0) {
-      doc.text("Evaluadores expertos en Musica", 14, contador + 15);
+      doc.text("Evaluadores expertos en Música", 14, contador + 15);
       doc.autoTable({ startY: contador + 20, html: '#musica' });
     }
 
